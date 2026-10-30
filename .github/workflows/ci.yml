@@ -1,3 +1,4 @@
+#Continuous Integration
 name: CI
 
 on:
@@ -45,4 +46,3 @@ jobs:
           if not json_files:
               print("No JSON files found yet; skipping JSON validation.")
           PY
-          
