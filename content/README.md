@@ -6,6 +6,7 @@ Use it for blog posts, knowledge base entries, landing-page copy, or structured 
 
 # WIT-Hub Architecture
 
+
 ## 1. Project Overview
 WIT-Hub is a website for Georgia Tech female students and the broader Georgia Tech community that brings together multiple resources to support students. The website collects opportunities, events, programs, and other resources, allowing users to view, search, and filter information.
 
