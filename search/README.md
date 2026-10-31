@@ -41,7 +41,7 @@ or punctuation-only queries return no lexical matches. There is no semantic matc
 
 Selections within a filter use OR; different filters use AND. Major/year filters include
 unrestricted opportunities. Year `4` means **4+ year**. Use consistent full major names;
-aliases such as CS are not expanded automatically. Location name is a case-insensitive,
+structured major filters require full names (query acronyms are expanded separately). Location name is a case-insensitive,
 literal substring (street, venue, Zoom). Mode is `online` or `in-person`.
 
 Date ranges are inclusive and target `starts_at` or `application_deadline`. Supply timestamps
@@ -51,6 +51,40 @@ to the appropriate local day boundaries. Null dates do not satisfy a date range.
 Deadlines strictly before the current instant are hidden. Null deadlines mean **no application
 deadline**, not an unverified deadline. Directory callers may set `include_expired: true`.
 This rule does not automatically hide past events with no application deadline.
+
+## Query interpretation
+
+Plain queries now have deterministic preprocessing in `search/query.py`:
+
+- CS, AI, ML, and WIT match either the acronym or its full phrase. Alternative
+  terms stay grouped: `CS internships` still requires internships as well as CS
+  or computer science. PM is ambiguous and remains literal.
+- Curated typos (`internshps`, `internsip`, `scholorships`, `hackaton`) are corrected.
+  Unknown words are not guessed. Extend `CORRECTIONS` deliberately as evidence grows.
+- `next week` means next Monday at midnight through the following Monday, exclusive.
+  `this weekend` means this calendar week's Saturday through Monday, including when
+  searched on Sunday. `today` and `tomorrow` are local calendar days.
+- Month names, `summer`, and years 2000-2099 select start-date windows. A missing year
+  means the current year, even if that period has passed. Summer means June-August.
+  For example, in October 2026, `summer` means summer 2026, not summer 2027.
+- The default timezone is `America/New_York`; pass an IANA `timezone` to change it.
+  Windows timezone data is supplied by the `tzdata` dependency. DST is respected.
+- Inferred windows always constrain `starts_at` and intersect explicit date and
+  eligibility filters. Missing start times cannot match. Date-only queries browse
+  within the inferred window. A date does not override expired-deadline exclusion.
+- Quoted phrases, explicit OR, and minus exclusions preserve the entire query's
+  original websearch behavior; preprocessing is disabled for those queries.
+  Set `interpret: false` to opt out explicitly, including for literal numeric titles.
+
+Only the first recognized date expression is extracted; this is not a general
+natural-language date parser. Unsupported words remain lexical constraints.
+API responses and batch reports include an `interpretation` with lexical groups,
+correction/expansion notes, and the inferred timestamp boundaries, even with zero results.
+
+Ranking retains weighted PostgreSQL relevance: title matches outrank otherwise
+equivalent description matches. Recommendation preference scores take precedence
+when a profile is supplied. Deadline and ID provide stable ties before pagination.
+Automated tests assert these orderings with multiple candidates and distractors.
 
 ## Find Something for Me
 
@@ -102,8 +136,28 @@ The runner uses `DATABASE_URL`, read-only transactions, and the normal default d
 filter. It prints actual results as JSON and exits unsuccessfully if the database is
 unconfigured or a query fails. Queries are preserved in `search/test_queries.json`.
 This is an exploratory report, not a relevance pass/fail test: expected records require
-a curated catalog. Relative dates, acronym expansion, and typo correction are not
-implemented; these inputs are sent unchanged to lexical search.
+a curated catalog. Reports include a single evaluation timestamp and the interpretation
+of each query so date-sensitive results can be reviewed.
+
+To load the expanded fictional demo catalog into your existing development database,
+rerun the seed only (do not rerun the schema migration):
+
+```powershell
+& "$pgBin\psql.exe" -h localhost -p 5432 -U wit_app -d wit_hub -W -v ON_ERROR_STOP=1 -f content/seed_demo.sql
+```
+
+There are 22 records on a fresh load. The original six IDs are preserved on conflict;
+the 16 additional demo IDs are updated on rerun, refreshing their relative dates.
+All are fictional. The fixed 2027 examples intentionally stop matching future date
+windows as time advances. `search-results-expanded.json` records an isolated demo run;
+your original root `search-results.json` is unchanged.
+
+The October 31, 2026 isolated run returned matches for 19/20 queries. The remaining
+`paid summer research for aerospace` means summer 2026 under the documented rule;
+the aerospace fixture starts in July 2027. Adding `2027` selects that record.
+This is fixture coverage, not a production accuracy claim. PM only matches because
+the sample explicitly names PM; jobs and competitions have their own records rather
+than assuming internships or hackathons satisfy those categories.
 
 ```powershell
 uv run --with-requirements backend/requirements.txt --with pytest --with httpx python -m pytest -q

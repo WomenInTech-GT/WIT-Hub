@@ -1,4 +1,6 @@
 import os
+from datetime import datetime, timezone
+from search.query import interpret_query
 
 import psycopg
 from fastapi import FastAPI, HTTPException
@@ -31,16 +33,18 @@ def api_root():
 
 
 def run_search(filters: SearchFilters, profile=None):
+    now = datetime.now(timezone.utc)
     database_url = os.environ.get("DATABASE_URL")
     if not database_url:
         raise HTTPException(status_code=503, detail="Search database is not configured")
     try:
         with psycopg.connect(database_url, connect_timeout=5) as connection:
             connection.execute("SET LOCAL statement_timeout = '5s'")
-            items = search_opportunities(connection, filters, profile)
+            items = search_opportunities(connection, filters, profile, now=now)
     except psycopg.OperationalError as exc:
         raise HTTPException(status_code=503, detail="Search database is unavailable") from exc
-    return {"items": items, "limit": filters.limit, "offset": filters.offset}
+    return {"items": items, "limit": filters.limit, "offset": filters.offset,
+            "interpretation": interpret_query(filters.query, now, filters.timezone, filters.interpret).as_dict()}
 
 
 @app.post("/api/search")

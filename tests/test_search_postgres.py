@@ -13,7 +13,7 @@ import pytest
 from psycopg import sql
 from psycopg.rows import dict_row
 
-from search.service import SearchFilters, StudentProfile, build_search, search_opportunities
+from search.service import RankingWeights, SearchFilters, StudentProfile, build_search, search_opportunities
 
 
 @pytest.fixture
@@ -95,3 +95,58 @@ def test_combined_filters_and_availability(db):
     assert ids(db, SearchFilters(timeline="deadline", date_from=start)) == []
     assert ids(db, profile=StudentProfile(available_from=start, available_to=start + timedelta(hours=2))) == ["match"]
     assert ids(db, SearchFilters(location="%")) == []
+
+
+def test_expansion_correction_and_required_terms(db):
+    add(db, 'expanded', title='Computer science internship', description='', tags=[],
+        starts_at=datetime(2027, 7, 1, tzinfo=timezone.utc))
+    add(db, 'irrelevant', title='Computer science conference', description='', tags=[],
+        starts_at=datetime(2027, 7, 1, tzinfo=timezone.utc))
+    assert ids(db, SearchFilters(query='CS internshps summer 2027')) == ['expanded']
+    assert ids(db, SearchFilters(query='CS internshps summer 2027', interpret=False)) == []
+    assert ids(db, SearchFilters(query='"CS internship"')) == []
+
+
+def test_next_week_boundaries_and_expiration(db):
+    now = datetime.fromisoformat('2026-10-31T12:00:00-04:00')
+    for id, start in [('before', '2026-11-01T23:59:59-05:00'),
+                      ('first', '2026-11-02T00:00:00-05:00'),
+                      ('last', '2026-11-08T23:59:59-05:00'),
+                      ('after', '2026-11-09T00:00:00-05:00')]:
+        add(db, id, title='Women in Tech event', starts_at=datetime.fromisoformat(start))
+    add(db, 'expired', title='Women in Tech event', starts_at=datetime.fromisoformat('2026-11-03T12:00:00-05:00'),
+        application_deadline=now - timedelta(seconds=1))
+    rows = search_opportunities(db, SearchFilters(query='WIT events next week'), now=now)
+    assert [r['id'] for r in rows] == ['first', 'last']
+    assert len(search_opportunities(db, SearchFilters(query='next week'), now=now)) == 2
+
+
+def test_lexical_ranking_and_stable_pages(db):
+    add(db, 'z-title', title='Robotics', description='', tags=[])
+    add(db, 'a-body', title='Engineering research', description='Robotics', tags=[])
+    add(db, 'b-body', title='Engineering research', description='Robotics', tags=[])
+    add(db, 'irrelevant', title='Music', description='', tags=[])
+    rows = search_opportunities(db, SearchFilters(query='robotics'))
+    assert [r['id'] for r in rows] == ['z-title', 'a-body', 'b-body']
+    assert rows[0]['lexical_score'] > rows[1]['lexical_score']
+    assert ids(db, SearchFilters(query='robotics', limit=1, offset=1)) == ['a-body']
+
+
+def test_stopwords_and_exclusions(db):
+    add(db, 'robot', title='Robotics', description='', tags=[])
+    add(db, 'ai', title='Robotics AI', description='', tags=[])
+    assert ids(db, SearchFilters(query='the and')) == []
+    assert ids(db, SearchFilters(query='!!!')) == []
+    assert ids(db, SearchFilters(query='robotics -AI')) == ['robot']
+
+
+def test_tunable_recommendation_order_and_explanations(db):
+    add(db, 'interest', tags=['coding'], opportunity_type='research', location_mode='in-person')
+    add(db, 'format', tags=['music'], opportunity_type='workshop', location_mode='online')
+    profile = StudentProfile(interests=['coding'], opportunity_types=['workshop'], location_modes=['online'])
+    rows = search_opportunities(db, SearchFilters(limit=1), profile, RankingWeights(interests=4))
+    assert rows[0]['id'] == 'interest'
+    assert rows[0]['explanations'] == ['Matches your interests: coding']
+    rows = search_opportunities(db, SearchFilters(limit=1), profile, RankingWeights(interests=1))
+    assert rows[0]['id'] == 'format'
+    assert len(rows[0]['explanations']) == 2

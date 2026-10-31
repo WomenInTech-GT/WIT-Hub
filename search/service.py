@@ -3,12 +3,17 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import Literal
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+
+from search.query import interpret_query
 
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, field_validator, model_validator
 
 class SearchFilters(BaseModel):
     model_config = ConfigDict(extra="forbid")
     query: str = Field(default="", max_length=500)
+    interpret: bool = True
+    timezone: str = "America/New_York"
     majors: list[str] = Field(default_factory=list, max_length=50)
     academic_years: list[Literal[1, 2, 3, 4]] = Field(default_factory=list)
     opportunity_types: list[str] = Field(default_factory=list, max_length=50)
@@ -20,6 +25,15 @@ class SearchFilters(BaseModel):
     include_expired: bool = False
     limit: int = Field(default=20, ge=1, le=100)
     offset: int = Field(default=0, ge=0, le=100000)
+
+    @field_validator("timezone")
+    @classmethod
+    def valid_timezone(cls, value):
+        try:
+            ZoneInfo(value)
+        except (ZoneInfoNotFoundError, ValueError) as exc:
+            raise ValueError("Use an IANA timezone such as America/New_York") from exc
+        return value
 
     @field_validator("majors", "opportunity_types")
     @classmethod
@@ -76,7 +90,9 @@ def build_search(filters: SearchFilters, profile: StudentProfile | None = None,
     if now.tzinfo is None or now.utcoffset() is None:
         raise ValueError("now must include a timezone")
     weights = weights or RankingWeights()
+    plan = interpret_query(filters.query, now, filters.timezone, filters.interpret)
     params = {"query": filters.query.strip(), "now": now,
+              "groups": plan.groups,
               "limit": filters.limit, "offset": filters.offset}
     clauses = []
     if profile is not None or not filters.include_expired:
@@ -99,7 +115,10 @@ def build_search(filters: SearchFilters, profile: StudentProfile | None = None,
         if getattr(filters, field):
             params[field] = getattr(filters, field)
             clauses.append(f"o.{date_column} {operator} %({field})s")
-    if params["query"]:
+    if plan.start:
+        params.update(inferred_from=plan.start, inferred_before=plan.end)
+        clauses.append("o.starts_at >= %(inferred_from)s AND o.starts_at < %(inferred_before)s")
+    if plan.groups:
         clauses.append("o.search_vector @@ q.term")
     score = "0.0"
     if profile is not None:
@@ -129,7 +148,13 @@ def build_search(filters: SearchFilters, profile: StudentProfile | None = None,
         + %(location_weight)s * CASE WHEN o.location_mode = ANY(%(preferred_modes)s::text[]) THEN 1 ELSE 0 END"""
     where = " AND ".join(clauses) or "TRUE"
     sql = f"""
-        WITH q AS (SELECT websearch_to_tsquery('english', %(query)s) AS term)
+        WITH terms AS (
+            SELECT websearch_to_tsquery('english', value) AS term
+            FROM unnest(%(groups)s::text[]) AS value
+        ), q AS (
+            SELECT coalesce(string_agg('(' || term::text || ')', ' & ')
+                   FILTER (WHERE numnode(term) > 0), '')::tsquery AS term FROM terms
+        )
         SELECT o.id, o.title, o.description, o.source_url, o.opportunity_type,
                o.eligible_majors, o.eligible_years, o.experience_levels, o.tags,
                o.location_mode, o.location_name, o.starts_at, o.ends_at,
@@ -158,10 +183,11 @@ def explain_match(row: dict, profile: StudentProfile) -> list[str]:
 
 def search_opportunities(connection, filters: SearchFilters,
                          profile: StudentProfile | None = None,
-                         weights: RankingWeights | None = None) -> list[dict]:
+                         weights: RankingWeights | None = None,
+                         now: datetime | None = None) -> list[dict]:
     from psycopg.rows import dict_row
 
-    sql, params = build_search(filters, profile, weights)
+    sql, params = build_search(filters, profile, weights, now)
     with connection.cursor(row_factory=dict_row) as cursor:
         cursor.execute(sql, params)
         rows = cursor.fetchall()

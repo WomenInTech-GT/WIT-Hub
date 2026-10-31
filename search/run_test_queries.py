@@ -7,6 +7,8 @@ import json
 import os
 from pathlib import Path
 import sys
+from datetime import datetime, timezone
+from search.query import interpret_query
 
 import psycopg
 
@@ -21,6 +23,7 @@ def main():
                           "executed": 0, "queries": queries}, indent=2))
         return 1
     results = []
+    now = datetime.now(timezone.utc)
     try:
         with psycopg.connect(url, connect_timeout=5) as connection:
             connection.execute("SET TRANSACTION READ ONLY")
@@ -29,10 +32,11 @@ def main():
             assert count_row is not None
             count = count_row[0]
             for query in queries:
-                items = search_opportunities(connection, SearchFilters(query=query))
-                results.append({"query": query, "returned_count": len(items), "items": items})
+                items = search_opportunities(connection, SearchFilters(query=query), now=now)
+                results.append({"query": query, "returned_count": len(items), "items": items,
+                                "interpretation": interpret_query(query, now).as_dict()})
         print(json.dumps({"status": "completed", "catalog_count": count,
-                          "executed": len(results), "limit_per_query": 20,
+                          "executed": len(results), "limit_per_query": 20, "evaluated_at": now.isoformat(),
                           "results": results}, indent=2, default=str))
         return 0
     except psycopg.Error:

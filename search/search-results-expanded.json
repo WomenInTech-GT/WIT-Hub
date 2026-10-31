@@ -1,0 +1,894 @@
+﻿{
+  "status": "completed",
+  "catalog_count": 22,
+  "executed": 20,
+  "limit_per_query": 20,
+  "evaluated_at": "2026-10-31T23:42:22.701799+00:00",
+  "results": [
+    {
+      "query": "freshman opportunities",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-freshman",
+          "title": "DEMO: Freshman opportunities in technology",
+          "description": "An introductory event for first-year students exploring technical projects.",
+          "source_url": "https://example.org/demo/freshman",
+          "opportunity_type": "event",
+          "eligible_majors": [],
+          "eligible_years": [
+            1
+          ],
+          "experience_levels": [
+            "beginner"
+          ],
+          "tags": [
+            "coding",
+            "technology"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Demo campus room, Atlanta",
+          "starts_at": "2026-11-14 19:42:19.642188-05:00",
+          "ends_at": "2026-11-14 21:42:19.642188-05:00",
+          "application_deadline": "2026-11-07 19:42:19.642188-05:00",
+          "lexical_score": 0.5,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "freshman",
+          "opportunities"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "CS internships summer 2027",
+      "returned_count": 2,
+      "items": [
+        {
+          "id": "demo-cs-internship",
+          "title": "DEMO: CS internships summer 2027",
+          "description": "A fictional computer science internship involving web development.",
+          "source_url": "https://example.org/demo/cs-internship",
+          "opportunity_type": "internship",
+          "eligible_majors": [
+            "computer science"
+          ],
+          "eligible_years": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "experience_levels": [],
+          "tags": [
+            "coding",
+            "cs",
+            "web development"
+          ],
+          "location_mode": "online",
+          "location_name": "Remote",
+          "starts_at": "2027-06-01 09:00:00-04:00",
+          "ends_at": "2027-08-01 17:00:00-04:00",
+          "application_deadline": "2027-03-01 23:59:00-05:00",
+          "lexical_score": 0.60879284,
+          "match_score": "0.0",
+          "explanations": []
+        },
+        {
+          "id": "demo-expanded-cs",
+          "title": "DEMO: Computer science internship",
+          "description": "Build software with a mentor.",
+          "source_url": "https://example.org/demo/demo-expanded-cs",
+          "opportunity_type": "internship",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "coding"
+          ],
+          "location_mode": "online",
+          "location_name": "Remote",
+          "starts_at": "2027-07-01 10:00:00-04:00",
+          "ends_at": "2027-07-01 12:00:00-04:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.5,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "cs OR \"computer science\"",
+          "internships"
+        ],
+        "notes": [
+          "summer 2027 interpreted as a start-date window in America/New_York",
+          "Expanded cs to computer science"
+        ],
+        "starts_at_from": "2027-06-01T00:00:00-04:00",
+        "starts_at_before": "2027-09-01T00:00:00-04:00"
+      }
+    },
+    {
+      "query": "beginner-friendly hackathon",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-hackathon",
+          "title": "DEMO: Beginner-friendly hackathon",
+          "description": "Build a small coding project with a student team.",
+          "source_url": "https://example.org/demo/hackathon",
+          "opportunity_type": "hackathon",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [
+            "beginner"
+          ],
+          "tags": [
+            "coding",
+            "teamwork"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Demo innovation center, Atlanta",
+          "starts_at": "2026-11-21 19:42:19.642188-05:00",
+          "ends_at": "2026-11-22 19:42:19.642188-05:00",
+          "application_deadline": "2026-11-14 19:42:19.642188-05:00",
+          "lexical_score": 0.5,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "beginner-friendly",
+          "hackathon"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "AI projects",
+      "returned_count": 2,
+      "items": [
+        {
+          "id": "demo-ai-project",
+          "title": "DEMO: AI projects and machine learning projects",
+          "description": "An introductory project exploring classification and model evaluation.",
+          "source_url": "https://example.org/demo/ai-project",
+          "opportunity_type": "project",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [
+            "beginner",
+            "intermediate"
+          ],
+          "tags": [
+            "ai",
+            "coding",
+            "machine learning"
+          ],
+          "location_mode": "online",
+          "location_name": "Zoom",
+          "starts_at": "2026-11-14 19:42:19.642188-05:00",
+          "ends_at": "2026-12-12 19:42:19.642188-05:00",
+          "application_deadline": "2026-11-10 19:42:19.642188-05:00",
+          "lexical_score": 0.62566847,
+          "match_score": "0.0",
+          "explanations": []
+        },
+        {
+          "id": "demo-expanded-ai",
+          "title": "DEMO: Artificial intelligence projects",
+          "description": "An introductory classification project.",
+          "source_url": "https://example.org/demo/demo-expanded-ai",
+          "opportunity_type": "project",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "coding",
+            "artificial intelligence"
+          ],
+          "location_mode": "online",
+          "location_name": "Zoom",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.6226415,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "ai OR \"artificial intelligence\"",
+          "projects"
+        ],
+        "notes": [
+          "Expanded ai to artificial intelligence"
+        ],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "mechanical engineering research",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-robotics",
+          "title": "DEMO: Mechanical engineering research in robotics",
+          "description": "Explore robot design and mechanical engineering research methods.",
+          "source_url": "https://example.org/demo/robotics",
+          "opportunity_type": "research",
+          "eligible_majors": [
+            "mechanical engineering"
+          ],
+          "eligible_years": [
+            2,
+            3,
+            4
+          ],
+          "experience_levels": [
+            "intermediate"
+          ],
+          "tags": [
+            "mechanical engineering",
+            "robotics"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Demo engineering lab, Atlanta",
+          "starts_at": "2026-11-30 19:42:19.642188-05:00",
+          "ends_at": "2027-01-29 19:42:19.642188-05:00",
+          "application_deadline": "2026-11-20 19:42:19.642188-05:00",
+          "lexical_score": 0.65360636,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "mechanical",
+          "engineering",
+          "research"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "resume event",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-resume",
+          "title": "DEMO: Resume review event",
+          "description": "Practice communicating your experience.",
+          "source_url": "https://example.org/demo/demo-resume",
+          "opportunity_type": "event",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "careers"
+          ],
+          "location_mode": "online",
+          "location_name": "Zoom",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.33333334,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "resume",
+          "event"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "robotics",
+      "returned_count": 3,
+      "items": [
+        {
+          "id": "demo-robotics",
+          "title": "DEMO: Mechanical engineering research in robotics",
+          "description": "Explore robot design and mechanical engineering research methods.",
+          "source_url": "https://example.org/demo/robotics",
+          "opportunity_type": "research",
+          "eligible_majors": [
+            "mechanical engineering"
+          ],
+          "eligible_years": [
+            2,
+            3,
+            4
+          ],
+          "experience_levels": [
+            "intermediate"
+          ],
+          "tags": [
+            "mechanical engineering",
+            "robotics"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Demo engineering lab, Atlanta",
+          "starts_at": "2026-11-30 19:42:19.642188-05:00",
+          "ends_at": "2027-01-29 19:42:19.642188-05:00",
+          "application_deadline": "2026-11-20 19:42:19.642188-05:00",
+          "lexical_score": 0.61538464,
+          "match_score": "0.0",
+          "explanations": []
+        },
+        {
+          "id": "demo-robotics-title",
+          "title": "DEMO: Robotics",
+          "description": "Build a robot.",
+          "source_url": "https://example.org/demo/demo-robotics-title",
+          "opportunity_type": "project",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "coding"
+          ],
+          "location_mode": "online",
+          "location_name": "Zoom",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.54545456,
+          "match_score": "0.0",
+          "explanations": []
+        },
+        {
+          "id": "demo-robotics-body",
+          "title": "DEMO: Engineering lab placement",
+          "description": "Explore robotics.",
+          "source_url": "https://example.org/demo/demo-robotics-body",
+          "opportunity_type": "research",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "engineering"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Atlanta",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.16666667,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "robotics"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "scholarships for women",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-scholarship",
+          "title": "DEMO: Scholarships for women",
+          "description": "Fictional tuition support.",
+          "source_url": "https://example.org/demo/demo-scholarship",
+          "opportunity_type": "scholarship",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "funding"
+          ],
+          "location_mode": "online",
+          "location_name": "Online",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.44,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "scholarships",
+          "for",
+          "women"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "part-time data science program",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-data-program",
+          "title": "DEMO: Part-time data science program",
+          "description": "A fictional part-time learning program.",
+          "source_url": "https://example.org/demo/demo-data-program",
+          "opportunity_type": "program",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "data science"
+          ],
+          "location_mode": "online",
+          "location_name": "Zoom",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.5212766,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "part-time",
+          "data",
+          "science",
+          "program"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "PM mentorship",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-pm",
+          "title": "DEMO: PM mentorship",
+          "description": "Product management mentorship; PM is explicitly defined here.",
+          "source_url": "https://example.org/demo/demo-pm",
+          "opportunity_type": "mentorship",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "product management"
+          ],
+          "location_mode": "online",
+          "location_name": "Zoom",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.54545456,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "pm",
+          "mentorship"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "events happening this weekend on campus",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-campus-weekend",
+          "title": "DEMO: Campus events",
+          "description": "Meet students.",
+          "source_url": "https://example.org/demo/demo-campus-weekend",
+          "opportunity_type": "event",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "community"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Campus, Atlanta",
+          "starts_at": "2026-10-31 14:00:00-04:00",
+          "ends_at": "2026-10-31 16:00:00-04:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.5212766,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "events",
+          "campus"
+        ],
+        "notes": [
+          "this weekend interpreted as a start-date window in America/New_York"
+        ],
+        "starts_at_from": "2026-10-31T00:00:00-04:00",
+        "starts_at_before": "2026-11-02T00:00:00-05:00"
+      }
+    },
+    {
+      "query": "machine learning projects",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-ai-project",
+          "title": "DEMO: AI projects and machine learning projects",
+          "description": "An introductory project exploring classification and model evaluation.",
+          "source_url": "https://example.org/demo/ai-project",
+          "opportunity_type": "project",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [
+            "beginner",
+            "intermediate"
+          ],
+          "tags": [
+            "ai",
+            "coding",
+            "machine learning"
+          ],
+          "location_mode": "online",
+          "location_name": "Zoom",
+          "starts_at": "2026-11-14 19:42:19.642188-05:00",
+          "ends_at": "2026-12-12 19:42:19.642188-05:00",
+          "application_deadline": "2026-11-10 19:42:19.642188-05:00",
+          "lexical_score": 0.6959459,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "machine",
+          "learning",
+          "projects"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "paid summer research for aerospace",
+      "returned_count": 0,
+      "items": [],
+      "interpretation": {
+        "lexical_groups": [
+          "paid",
+          "research",
+          "aerospace"
+        ],
+        "notes": [
+          "summer interpreted as a start-date window in America/New_York"
+        ],
+        "starts_at_from": "2026-06-01T00:00:00-04:00",
+        "starts_at_before": "2026-09-01T00:00:00-04:00"
+      }
+    },
+    {
+      "query": "competitions in Atlanta",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-competition",
+          "title": "DEMO: Engineering competitions",
+          "description": "A fictional design competition.",
+          "source_url": "https://example.org/demo/demo-competition",
+          "opportunity_type": "competition",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "engineering"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Atlanta",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.16666667,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "competitions",
+          "in",
+          "atlanta"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "new grad opportunities",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-grad",
+          "title": "DEMO: New grad opportunities",
+          "description": "A fictional graduate recruiting event.",
+          "source_url": "https://example.org/demo/demo-grad",
+          "opportunity_type": "event",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "careers"
+          ],
+          "location_mode": "online",
+          "location_name": "Zoom",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.5,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "new",
+          "grad",
+          "opportunities"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "remote jobs for 2027",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-job",
+          "title": "DEMO: Remote jobs",
+          "description": "A fictional graduate software job.",
+          "source_url": "https://example.org/demo/demo-job",
+          "opportunity_type": "job",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "coding"
+          ],
+          "location_mode": "online",
+          "location_name": "Remote",
+          "starts_at": "2027-07-01 10:00:00-04:00",
+          "ends_at": "2027-07-01 12:00:00-04:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.54545456,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "remote",
+          "jobs"
+        ],
+        "notes": [
+          "2027 interpreted as a start-date window in America/New_York"
+        ],
+        "starts_at_from": "2027-01-01T00:00:00-05:00",
+        "starts_at_before": "2028-01-01T00:00:00-05:00"
+      }
+    },
+    {
+      "query": "in-person engineering workshops",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-workshop",
+          "title": "DEMO: In-person engineering workshops",
+          "description": "An introductory engineering workshop.",
+          "source_url": "https://example.org/demo/demo-workshop",
+          "opportunity_type": "workshop",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "engineering"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Atlanta",
+          "starts_at": "2026-11-20 19:42:19.642188-05:00",
+          "ends_at": "2026-11-20 21:42:19.642188-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.33333334,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "in-person",
+          "engineering",
+          "workshops"
+        ],
+        "notes": [],
+        "starts_at_from": null,
+        "starts_at_before": null
+      }
+    },
+    {
+      "query": "CS conferences in November",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-conference",
+          "title": "DEMO: Computer science conferences",
+          "description": "Research talks.",
+          "source_url": "https://example.org/demo/demo-conference",
+          "opportunity_type": "conference",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "computer science"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Atlanta",
+          "starts_at": "2026-11-11 10:00:00-05:00",
+          "ends_at": "2026-11-11 12:00:00-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.6551724,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "cs OR \"computer science\"",
+          "conferences"
+        ],
+        "notes": [
+          "November interpreted as a start-date window in America/New_York",
+          "Expanded cs to computer science"
+        ],
+        "starts_at_from": "2026-11-01T00:00:00-04:00",
+        "starts_at_before": "2026-12-01T00:00:00-05:00"
+      }
+    },
+    {
+      "query": "WIT events next week",
+      "returned_count": 1,
+      "items": [
+        {
+          "id": "demo-wit-next-week",
+          "title": "DEMO: Women in Tech events",
+          "description": "Meet students on campus.",
+          "source_url": "https://example.org/demo/demo-wit-next-week",
+          "opportunity_type": "event",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "community"
+          ],
+          "location_mode": "in-person",
+          "location_name": "Campus, Atlanta",
+          "starts_at": "2026-11-03 10:00:00-05:00",
+          "ends_at": "2026-11-03 12:00:00-05:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.33333334,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "wit OR \"women in tech\"",
+          "events"
+        ],
+        "notes": [
+          "next week interpreted as a start-date window in America/New_York",
+          "Expanded wit to women in tech"
+        ],
+        "starts_at_from": "2026-11-02T00:00:00-05:00",
+        "starts_at_before": "2026-11-09T00:00:00-05:00"
+      }
+    },
+    {
+      "query": "internshps 2027",
+      "returned_count": 2,
+      "items": [
+        {
+          "id": "demo-cs-internship",
+          "title": "DEMO: CS internships summer 2027",
+          "description": "A fictional computer science internship involving web development.",
+          "source_url": "https://example.org/demo/cs-internship",
+          "opportunity_type": "internship",
+          "eligible_majors": [
+            "computer science"
+          ],
+          "eligible_years": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "experience_levels": [],
+          "tags": [
+            "coding",
+            "cs",
+            "web development"
+          ],
+          "location_mode": "online",
+          "location_name": "Remote",
+          "starts_at": "2027-06-01 09:00:00-04:00",
+          "ends_at": "2027-08-01 17:00:00-04:00",
+          "application_deadline": "2027-03-01 23:59:00-05:00",
+          "lexical_score": 0.61538464,
+          "match_score": "0.0",
+          "explanations": []
+        },
+        {
+          "id": "demo-expanded-cs",
+          "title": "DEMO: Computer science internship",
+          "description": "Build software with a mentor.",
+          "source_url": "https://example.org/demo/demo-expanded-cs",
+          "opportunity_type": "internship",
+          "eligible_majors": [],
+          "eligible_years": [],
+          "experience_levels": [],
+          "tags": [
+            "coding"
+          ],
+          "location_mode": "online",
+          "location_name": "Remote",
+          "starts_at": "2027-07-01 10:00:00-04:00",
+          "ends_at": "2027-07-01 12:00:00-04:00",
+          "application_deadline": "2026-12-30 19:42:19.642188-05:00",
+          "lexical_score": 0.5833333,
+          "match_score": "0.0",
+          "explanations": []
+        }
+      ],
+      "interpretation": {
+        "lexical_groups": [
+          "internships"
+        ],
+        "notes": [
+          "2027 interpreted as a start-date window in America/New_York",
+          "Corrected internshps to internships"
+        ],
+        "starts_at_from": "2027-01-01T00:00:00-05:00",
+        "starts_at_before": "2028-01-01T00:00:00-05:00"
+      }
+    }
+  ]
+}
