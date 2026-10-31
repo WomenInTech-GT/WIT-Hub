@@ -1,0 +1,48 @@
+#Continuous Integration
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check repository structure
+        run: |
+          test -d frontend
+          test -d backend
+          test -d content
+          test -d docs
+
+      - name: Check required documentation
+        run: |
+          test -f README.md
+          test -f content/README.md
+          test -f docs/architecture.md
+          test -f frontend/README.md
+
+      - name: Validate JSON files
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          content_dir = Path("content")
+          json_files = list(content_dir.rglob("*.json"))
+
+          for file in json_files:
+              with file.open(encoding="utf-8") as f:
+                  json.load(f)
+              print(f"Valid JSON: {file}")
+
+          if not json_files:
+              print("No JSON files found yet; skipping JSON validation.")
+          PY
