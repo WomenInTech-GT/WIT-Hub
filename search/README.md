@@ -126,6 +126,20 @@ with catalog facts, source URL, lexical/match scores, and explanations per item.
 
 ## Verification and future hybrid retrieval
 
+GitHub Actions runs the **Search tests (PostgreSQL)** check on pull requests to
+`main`, pushes to `main`, and manual CI workflow runs. It starts a disposable
+PostgreSQL 18 service, runs all pytest tests with database integration enabled,
+loads the demo catalog, and executes every query in `search/test_queries.json`.
+No database secrets or local setup are required for CI.
+
+Download the `search-test-results` artifact from the workflow run to inspect the
+JSON search report and JUnit test report (retained for 14 days). Batch execution
+fails on database errors, an empty catalog, or missing queries; it does not require
+every query to return a match, since demo dates and query intent can legitimately
+produce zero results. Ranking, interpretation, and filtering assertions live in
+the pytest suite. Making this check mandatory for merging requires selecting it
+in the repository's branch protection or ruleset settings after its first run.
+
 Run the 20 user-supplied exploratory searches against your populated catalog:
 
 ```powershell
