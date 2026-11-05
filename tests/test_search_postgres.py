@@ -150,3 +150,28 @@ def test_tunable_recommendation_order_and_explanations(db):
     rows = search_opportunities(db, SearchFilters(limit=1), profile, RankingWeights(interests=1))
     assert rows[0]['id'] == 'format'
     assert len(rows[0]['explanations']) == 2
+
+
+def test_explicit_or_and_quoted_phrases(db):
+    add(db, 'robotics', title='Robotics', description='', tags=[])
+    add(db, 'phrase', title='Machine learning', description='', tags=[])
+    add(db, 'separated', title='Machine design and learning', description='', tags=[])
+    add(db, 'unrelated', title='Music', description='', tags=[])
+    assert set(ids(db, SearchFilters(query='robotics OR "machine learning"'))) == {'robotics', 'phrase'}
+    assert ids(db, SearchFilters(query='"machine learning"')) == ['phrase']
+
+
+def test_inferred_start_window_intersects_explicit_deadline_window(db):
+    now = datetime.fromisoformat('2026-10-31T12:00:00-04:00')
+    for id, start, deadline in [
+        ('match', '2026-11-03T12:00:00-05:00', '2026-11-02T12:00:00-05:00'),
+        ('wrong-start', '2026-11-10T12:00:00-05:00', '2026-11-02T12:00:00-05:00'),
+        ('wrong-deadline', '2026-11-03T12:00:00-05:00', '2026-11-04T12:00:00-05:00'),
+    ]:
+        add(db, id, starts_at=datetime.fromisoformat(start),
+            application_deadline=datetime.fromisoformat(deadline))
+    add(db, 'unknown-start', application_deadline=datetime.fromisoformat('2026-11-02T12:00:00-05:00'))
+    filters = SearchFilters(query='next week', timeline='deadline',
+                            date_from='2026-11-02T00:00:00-05:00',
+                            date_to='2026-11-03T00:00:00-05:00')
+    assert [r['id'] for r in search_opportunities(db, filters, now=now)] == ['match']
