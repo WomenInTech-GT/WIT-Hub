@@ -1,0 +1,268 @@
+.about-main {
+    max-width: 1080px
+}
+
+.about-hero {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 65px;
+    align-items: center;
+    padding: 0 0 65px
+}
+
+.about-copy .eyebrow {
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 18px
+}
+
+.about-copy h1 {
+    font-size: clamp(36px, 4.4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px
+}
+
+.about-copy p:not(.eyebrow) {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 530px
+}
+
+.about-copy p.about-lead {
+    color: var(--ink);
+    font-size: 15px
+}
+
+.meet-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green)
+}
+
+.team-image-space {
+    min-height: 290px;
+    border-radius: 20px;
+    background: #deeeea
+}
+
+.team-section {
+    border-top: 1px solid var(--line);
+    padding: 36px 0 46px;
+    scroll-margin-top: 30px
+}
+
+.team-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: flex-end;
+    margin-bottom: 25px
+}
+
+.team-heading .eyebrow {
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-bottom: 10px
+}
+
+.team-heading h2 {
+    font-size: 32px;
+    font-weight: 500
+}
+
+.team-heading p:not(.eyebrow) {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 0
+}
+
+.team-heading aside {
+    max-width: 245px
+}
+
+.team-heading aside p:not(.eyebrow) {
+    font-size: 11px
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px
+}
+
+.team-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-top: 4px solid #deeeea;
+    border-radius: 10px;
+    padding: 25px;
+    min-height: 155px
+}
+
+.team-card:nth-child(3n+2) {
+    border-top-color: #f3edc5
+}
+
+.team-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 7px
+}
+
+.team-card .team-role {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0 0 12px
+}
+
+.team-card p {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0
+}
+
+.about-cta {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 30px;
+    background: var(--ink);
+    color: white;
+    padding: 32px;
+    border-radius: 17px
+}
+
+.about-cta .eyebrow {
+    font-size: 9px;
+    color: var(--yellow);
+    letter-spacing: .5px;
+    margin-bottom: 13px
+}
+
+.about-cta h2 {
+    font-size: 29px
+}
+
+.about-cta p:not(.eyebrow) {
+    font-size: 11px;
+    line-height: 1.7;
+    color: #d4e1dc;
+    margin: 12px 0 0
+}
+
+.about-cta small {
+    display: block;
+    text-align: center;
+    font-size: 9px;
+    color: #d4e1dc;
+    margin-top: 12px
+}
+
+.about-connect {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 10px 0 28px;
+    line-height: 1.8
+}
+
+.about-connect a {
+    color: var(--green);
+    margin-left: 8px
+}
+
+@media(max-width:850px) {
+    .about-hero {
+        gap: 30px
+    }
+
+    .team-image-space {
+        min-height: 260px
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+    .about-cta {
+        grid-template-columns: 1fr
+    }
+
+    .about-cta>div:last-child {
+        justify-self: start
+    }
+}
+
+@media(max-width:560px) {
+    .about-hero {
+        grid-template-columns: 1fr;
+        padding-bottom: 35px;
+        gap: 25px
+    }
+
+    .team-image-space {
+        min-height: 220px
+    }
+
+    .team-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px
+    }
+
+    .team-heading aside {
+        max-width: none
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr
+    }
+
+    .team-card {
+        min-height: 0
+    }
+
+    .about-cta {
+        padding: 25px
+    }
+
+    .about-cta h2 {
+        font-size: 25px
+    }
+
+    .about-connect a {
+        display: block;
+        margin-left: 0
+    }
+}
+
+.team-image-space {
+    overflow: hidden
+}
+
+.team-image-space img {
+    display: block;
+    width: 100%;
+    height: 290px;
+    object-fit: cover
+}
+
+@media(max-width:850px) {
+    .team-image-space img {
+        height: 260px
+    }
+}
+
+@media(max-width:560px) {
+    .team-image-space img {
+        height: 220px
+    }
+}
+.about-main>.about-hero:first-child{padding-top:36px}
