@@ -17,7 +17,9 @@ class SearchFilters(BaseModel):
     majors: list[str] = Field(default_factory=list, max_length=50)
     academic_years: list[Literal[1, 2, 3, 4]] = Field(default_factory=list)
     opportunity_types: list[str] = Field(default_factory=list, max_length=50)
-    location_modes: list[Literal["online", "in-person"]] = Field(default_factory=list)
+    content_kinds: list[Literal["opportunity", "event", "program", "resource"]] = Field(default_factory=list)
+    categories: list[str] = Field(default_factory=list, max_length=50)
+    location_modes: list[Literal["online", "in-person", "hybrid", "unknown", "not-applicable"]] = Field(default_factory=list)
     location: str = Field(default="", max_length=200)
     timeline: Literal["start", "deadline"] = "start"
     date_from: AwareDatetime | None = None
@@ -35,7 +37,7 @@ class SearchFilters(BaseModel):
             raise ValueError("Use an IANA timezone such as America/New_York") from exc
         return value
 
-    @field_validator("majors", "opportunity_types")
+    @field_validator("majors", "opportunity_types", "categories")
     @classmethod
     def normalize(cls, values):
         return sorted({value.strip().lower() for value in values if value.strip()})
@@ -54,7 +56,7 @@ class StudentProfile(BaseModel):
     experience_level: Literal["beginner", "intermediate", "advanced"] | None = None
     interests: list[str] = Field(default_factory=list, max_length=50)
     opportunity_types: list[str] = Field(default_factory=list, max_length=50)
-    location_modes: list[Literal["online", "in-person"]] = Field(default_factory=list)
+    location_modes: list[Literal["online", "in-person", "hybrid"]] = Field(default_factory=list)
     available_from: AwareDatetime | None = None
     available_to: AwareDatetime | None = None
 
@@ -96,32 +98,46 @@ def build_search(filters: SearchFilters, profile: StudentProfile | None = None,
               "limit": filters.limit, "offset": filters.offset}
     clauses = []
     if profile is not None or not filters.include_expired:
-        clauses.append("(o.application_deadline IS NULL OR o.application_deadline >= %(now)s)")
+        clauses.append("""(o.deadline_at IS NULL OR o.deadline_at >= %(now)s)
+            AND (o.deadline_date IS NULL OR o.deadline_date >= (%(now)s AT TIME ZONE o.deadline_timezone)::date)
+            AND (o.content_kind <> 'event' OR
+                (o.schedule_precision = 'date' AND coalesce(o.end_date, o.start_date) >= (%(now)s AT TIME ZONE o.timezone)::date)
+                OR (o.schedule_precision = 'time' AND
+                    (o.ends_at >= %(now)s OR (o.ends_at IS NULL AND
+                     (o.starts_at AT TIME ZONE o.timezone)::date >= (%(now)s AT TIME ZONE o.timezone)::date))))""")
     for field, column in (("majors", "eligible_majors"), ("academic_years", "eligible_years")):
         values = getattr(filters, field)
         if values:
             params[field] = values
             cast = "integer[]" if field == "academic_years" else "text[]"
             clauses.append(f"(cardinality(o.{column}) = 0 OR o.{column} && %({field})s::{cast})")
-    for field, column in (("opportunity_types", "opportunity_type"), ("location_modes", "location_mode")):
+    for field, column in (("opportunity_types", "opportunity_type"), ("categories", "category"),
+                          ("content_kinds", "content_kind"), ("location_modes", "location_mode")):
         if getattr(filters, field):
             params[field] = getattr(filters, field)
             clauses.append(f"o.{column} = ANY(%({field})s)")
     if filters.location.strip():
         params["location"] = filters.location.strip()
         clauses.append("strpos(lower(o.location_name), lower(%(location)s)) > 0")
-    date_column = {"start": "starts_at", "deadline": "application_deadline"}[filters.timeline]
+    date_column, date_only, date_zone = {
+        "start": ("starts_at", "start_date", "timezone"),
+        "deadline": ("deadline_at", "deadline_date", "deadline_timezone"),
+    }[filters.timeline]
     for field, operator in (("date_from", ">="), ("date_to", "<=")):
         if getattr(filters, field):
             params[field] = getattr(filters, field)
-            clauses.append(f"o.{date_column} {operator} %({field})s")
+            clauses.append(f"(o.{date_column} {operator} %({field})s OR o.{date_only} {operator} (%({field})s AT TIME ZONE o.{date_zone})::date)")
     if plan.start:
         params.update(inferred_from=plan.start, inferred_before=plan.end)
-        clauses.append("o.starts_at >= %(inferred_from)s AND o.starts_at < %(inferred_before)s")
+        params.update(inferred_date_from=plan.start.date(), inferred_date_before=plan.end.date())
+        clauses.append("""((o.starts_at >= %(inferred_from)s AND o.starts_at < %(inferred_before)s)
+            OR (o.start_date >= %(inferred_date_from)s AND o.start_date < %(inferred_date_before)s))""")
     if plan.groups:
         clauses.append("o.search_vector @@ q.term")
     score = "0.0"
     if profile is not None:
+        # Unparsed prose and unknown requirements cannot establish eligibility.
+        clauses.append("o.eligibility_status <> 'unknown' AND cardinality(o.eligibility) = 0")
         params.update(student_majors=profile.majors,
                       student_years=[] if profile.academic_year is None else [profile.academic_year],
                       student_levels=[] if profile.experience_level is None else [profile.experience_level],
@@ -155,15 +171,15 @@ def build_search(filters: SearchFilters, profile: StudentProfile | None = None,
             SELECT coalesce(string_agg('(' || term::text || ')', ' & ')
                    FILTER (WHERE numnode(term) > 0), '')::tsquery AS term FROM terms
         )
-        SELECT o.id, o.title, o.description, o.source_url, o.opportunity_type,
-               o.eligible_majors, o.eligible_years, o.experience_levels, o.tags,
-               o.location_mode, o.location_name, o.starts_at, o.ends_at,
-               o.application_deadline,
+        SELECT o.*,
                ts_rank_cd(o.search_vector, q.term, 32) AS lexical_score,
                ({score}) AS match_score
-        FROM opportunities o CROSS JOIN q WHERE {where}
+        FROM (SELECT c.*, c.url AS source_url, c.category AS opportunity_type,
+                     coalesce(c.location, '') AS location_name,
+                     c.deadline_at AS application_deadline
+              FROM catalog.content_items c) o CROSS JOIN q WHERE {where}
         ORDER BY match_score DESC, lexical_score DESC,
-                 o.application_deadline ASC NULLS LAST, o.id ASC
+                 coalesce(o.deadline_at, (o.deadline_date + 1)::timestamp AT TIME ZONE o.deadline_timezone) ASC NULLS LAST, o.id ASC
         LIMIT %(limit)s OFFSET %(offset)s
     """
     return sql, params
@@ -192,6 +208,7 @@ def search_opportunities(connection, filters: SearchFilters,
         cursor.execute(sql, params)
         rows = cursor.fetchall()
     for row in rows:
+        row.pop("search_vector", None)
         row["explanations"] = explain_match(row, profile) if profile is not None else []
     return rows
 

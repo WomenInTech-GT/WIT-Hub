@@ -6,12 +6,12 @@ Run from the repository root with Python 3.10+ and PostgreSQL 14+:
 uv venv
 uv pip install -r backend/requirements.txt
 $env:DATABASE_URL = 'postgresql://USER:PASSWORD@localhost:5432/wit_hub'
-psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f backend/migrations/001_opportunities.sql
+psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f backend/migrations/002_content_catalog.sql
 uv run uvicorn backend.app.main:app --reload
 ```
 
 The migration is applied **once** to a new database, never automatically at server startup.
-Populate `opportunities` from verified catalog records; there are no pretend production results.
+Populate `catalog.content_items` from verified catalog records; there are no pretend production results.
 The insert/update trigger maintains a weighted, GIN-indexed full-text vector (title, then
 tags/type, then description/location). See `/docs` for the interactive API.
 
@@ -42,15 +42,26 @@ or punctuation-only queries return no lexical matches. There is no semantic matc
 Selections within a filter use OR; different filters use AND. Major/year filters include
 unrestricted opportunities. Year `4` means **4+ year**. Use consistent full major names;
 structured major filters require full names (query acronyms are expanded separately). Location name is a case-insensitive,
-literal substring (street, venue, Zoom). Mode is `online` or `in-person`.
+literal substring (street, venue, Zoom). Modes include `online`, `in-person`, `hybrid`, `unknown`, and `not-applicable`.
 
-Date ranges are inclusive and target `starts_at` or `application_deadline`. Supply timestamps
-with UTC offsets, including the desired time of day. Date-only UI inputs should be converted
-to the appropriate local day boundaries. Null dates do not satisfy a date range.
+Use `content_kinds` to select opportunity/event/program/resource and `categories`
+to select internship/workshop/guide/etc. The older `opportunity_types` filter remains
+an alias in meaning for category; if both are supplied their constraints intersect.
+Responses include canonical catalog fields plus legacy `source_url`,
+`opportunity_type`, `location_name`, and `application_deadline` aliases.
 
-Deadlines strictly before the current instant are hidden. Null deadlines mean **no application
-deadline**, not an unverified deadline. Directory callers may set `include_expired: true`.
-This rule does not automatically hide past events with no application deadline.
+Date ranges are inclusive. Timed records compare exact instants; date-only records
+compare the local calendar dates of the supplied bounds in the record's timezone.
+Unknown dates do not satisfy date filters. Inferred query windows use the query's
+local calendar dates for date-only schedules and exact boundaries for timed schedules.
+Raw date-only records retain null timestamp fields in responses.
+
+Fixed timestamp deadlines expire strictly after their instant; date-only deadlines
+remain open through their local day, including DST changes. Rolling, absent, and
+unknown deadlines remain distinct and visible in directory search. Past events
+are hidden using their end; when a timed event's end is unknown it remains visible
+through its start's local calendar day. `include_expired: true` overrides both rules
+for directory search, but never for recommendations. Resources do not expire by date.
 
 ## Query interpretation
 
@@ -112,13 +123,13 @@ preference -> location_modes. Also collect major for restricted opportunities. R
 weekly availability is not modeled in this MVP.
 
 Recommendations always exclude expired deadlines, even if `include_expired` is true.
-Empty catalog eligibility arrays mean unrestricted. Missing quiz eligibility answers only
-allow unrestricted records for that dimension. Availability requires a known start at/after
+Unknown eligibility and any unparsed eligibility prose are excluded from recommendations. Explicitly unrestricted records and matching structured restrictions are eligible. Missing quiz eligibility answers only
+allow unrestricted records for that dimension. Availability requires a known timed start at/after
 the lower bound and a known end at/before the upper bound when provided. Type and location
 preferences boost scores; use `filters` to make them mandatory.
 
-Score = 3 × fraction of selected interests matching tags + 2 × preferred type match
-+ 1 × preferred location mode match. Tune server-side `RankingWeights` when calling
+Score = 3 Ã— fraction of selected interests matching tags + 2 Ã— preferred type match
++ 1 Ã— preferred location mode match. Tune server-side `RankingWeights` when calling
 `search_opportunities`. All eligible records are scored **before** limit/offset. Ties sort
 by lexical score, earliest deadline (null last), then ID. Explanations list actual overlaps;
 zero-overlap results are labeled as such. Responses contain `items`, `limit`, and `offset`,
@@ -157,7 +168,7 @@ To load the expanded fictional demo catalog into your existing development datab
 rerun the seed only (do not rerun the schema migration):
 
 ```powershell
-& "$pgBin\psql.exe" -h localhost -p 5432 -U wit_app -d wit_hub -W -v ON_ERROR_STOP=1 -f content/seed_demo.sql
+& "$pgBin\psql.exe" -h localhost -p 5432 -U wit_app -d wit_hub -W -v ON_ERROR_STOP=1 -f content/seed_catalog_demo.sql
 ```
 
 There are 22 records on a fresh load. The original six IDs are preserved on conflict;

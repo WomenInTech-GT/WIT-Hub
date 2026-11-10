@@ -1,5 +1,3 @@
--- Optional PostgreSQL target for the JSON MVP's shared content contract.
--- Additive: 001 and its consumers remain intact until the application cutover.
 BEGIN;
 CREATE SCHEMA catalog;
 
@@ -17,7 +15,6 @@ CREATE TABLE catalog.content_items (
     tags text[] NOT NULL DEFAULT '{}',
     relevant_majors text[] NOT NULL DEFAULT '{}',
 
-    -- Human-readable requirements are retained, not inferred from tags.
     eligibility text[] NOT NULL DEFAULT '{}',
     eligibility_status text NOT NULL DEFAULT 'unknown'
         CHECK (eligibility_status IN ('unknown', 'unrestricted', 'restricted')),
@@ -31,7 +28,7 @@ CREATE TABLE catalog.content_items (
         CHECK (location_mode IN ('unknown', 'online', 'in-person', 'hybrid', 'not-applicable')),
     location text CHECK (location IS NULL OR length(trim(location)) > 0),
 
-    -- Date-only and timed schedules are mutually exclusive. Do not invent midnight.
+    -- Date-only and timed schedules are mutually exclusive.
     schedule_precision text NOT NULL DEFAULT 'unknown'
         CHECK (schedule_precision IN ('unknown', 'date', 'time', 'not-applicable')),
     start_date date,
@@ -149,8 +146,6 @@ CREATE INDEX content_deadline_date_idx ON catalog.content_items(deadline_date);
 CREATE INDEX content_starts_at_idx ON catalog.content_items(starts_at);
 CREATE INDEX content_start_date_idx ON catalog.content_items(start_date);
 
--- One globally unique ID and one common search representation, four entry points.
--- Supply content_kind explicitly when inserting through a view.
 CREATE VIEW catalog.opportunities AS
     SELECT * FROM catalog.content_items WHERE content_kind = 'opportunity'
     WITH CASCADED CHECK OPTION;
@@ -164,3 +159,4 @@ CREATE VIEW catalog.resources AS
     SELECT * FROM catalog.content_items WHERE content_kind = 'resource'
     WITH CASCADED CHECK OPTION;
 COMMIT;
+

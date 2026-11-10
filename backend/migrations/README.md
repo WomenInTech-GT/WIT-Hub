@@ -1,23 +1,26 @@
 # Content catalog SQL design
 
 The MVP remains JSON-based. This SQL is an optional future persistence target,
-not a requirement to deploy PostgreSQL for the MVP. JSON validation, export,
-application integration, and tests are deferred to the next stage.
+not a requirement to deploy PostgreSQL for the MVP. The PostgreSQL search path is integrated; JSON validation and export remain follow-up work.
 
-## Migration stages
+## Setup and existing databases
 
-- `001_opportunities.sql` is the existing search prototype. Leave it unchanged
-  for databases that have already applied it.
-- `002_content_catalog.sql` adds the canonical model in the `catalog` schema.
-  It does not alter, delete, or automatically copy legacy opportunity records.
-  Apply each migration once, in filename order, using a migration ledger or
-  an operator-maintained record. These scripts intentionally fail on reapplication.
-- `content/seed_demo.sql` remains the legacy fixture. The separate
-  `content/seed_catalog_demo.sql` illustrates all four new kinds after migration 002.
-  It uses fixed dates and skips existing IDs on rerun; it does not refresh them.
+`002_content_catalog.sql` is now the standalone baseline. Apply it once to a new
+PostgreSQL database, then optionally load `content/seed_catalog_demo.sql`.
+The number is retained so installations that already applied it do not confuse
+it with a new migration. Search, API, CI, and tests now use `catalog.content_items`.
+The earlier opportunity migration and seed have been removed from the repository.
 
-No SQL was applied to a database during this design stage. Existing search/API
-code still reads the legacy table and does not yet expose the new catalog.
+Existing databases: apply the catalog migration only if it has not already been
+applied. It does not copy or delete the old `public.opportunities` table. Export
+and review any real records before importing them into the catalog; verify kind,
+organization, source, dates, and eligibility rather than inventing metadata.
+Keep deployed migration records/backups. Do not drop the old table until its data
+has been migrated and checked. No user database is modified by this code change.
+
+Integration tests require a disposable database without a `catalog` schema;
+they create that schema inside a transaction and roll it back after each test.
+They never drop an existing schema. Run them before loading the demo catalog.
 
 ## Combined model
 
@@ -85,15 +88,9 @@ to lowercase; prose and organization names retain their case.
   events. When an exact end is unknown, do not invent one. Programs may close for
   applications before they finish. Resources need freshness review, not date expiry.
 
-## Next integration stage
+## Remaining JSON MVP work
 
-1. Implement the same field rules in the JSON schema and content validation.
-2. Review each legacy record's kind, category, source, organization, eligibility
-   status, and date precision before generating canonical JSON. Preserve IDs.
-3. Generate/import SQL from validated JSON when a database is needed; do not
-   maintain independent production JSON and SQL seed catalogs.
-4. Adapt search/API consumers and date-aware filtering, then update tests and CI.
-5. Retire the legacy table only after a reviewed migration and consumer cutover.
-
-The new schema is deliberately additive so this SQL-only work does not silently
-change the behavior of the existing search implementation.
+The PostgreSQL search implementation is now integrated. JSON validation, static
+client-side search, and JSON-to-SQL import/export remain separate follow-up work.
+When introduced, validated JSON should be the source of truth rather than a
+second independently maintained production catalog.

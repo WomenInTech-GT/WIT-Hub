@@ -33,7 +33,7 @@ jobs:
     env:
       # Disposable service credentials, not a developer or production database.
       DATABASE_URL: postgresql://postgres:ci-only-password@localhost:5432/wit_search_ci
-      # Integration tests create isolated schemas and roll them back.
+      # Tests require no existing catalog schema; create and roll it back per test.
       TEST_DATABASE_URL: postgresql://postgres:ci-only-password@localhost:5432/wit_search_ci
     steps:
       - name: Checkout repository
@@ -60,9 +60,9 @@ jobs:
           import psycopg
 
           with psycopg.connect(os.environ["DATABASE_URL"], autocommit=True) as connection:
-              for filename in ("backend/migrations/001_opportunities.sql", "content/seed_demo.sql"):
+              for filename in ("backend/migrations/002_content_catalog.sql", "content/seed_catalog_demo.sql"):
                   connection.execute(Path(filename).read_text(encoding="utf-8"))
-              count = connection.execute("SELECT count(*) FROM opportunities").fetchone()[0]
+              count = connection.execute("SELECT count(*) FROM catalog.content_items").fetchone()[0]
               if not count:
                   raise RuntimeError("The demo catalog is empty")
           PY

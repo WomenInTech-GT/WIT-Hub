@@ -28,7 +28,7 @@ def main():
         with psycopg.connect(url, connect_timeout=5) as connection:
             connection.execute("SET TRANSACTION READ ONLY")
             connection.execute("SET LOCAL statement_timeout = '10s'")
-            count_row = connection.execute("SELECT count(*) FROM opportunities").fetchone()
+            count_row = connection.execute("SELECT count(*) FROM catalog.content_items").fetchone()
             assert count_row is not None
             count = count_row[0]
             for query in queries:
