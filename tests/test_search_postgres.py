@@ -1,12 +1,12 @@
 """Real PostgreSQL contract tests; set TEST_DATABASE_URL to enable.
 
-All objects and fixture records live in a unique schema rolled back after each test.
+Use a disposable database without a catalog schema. Each test rolls back its schema.
 """
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import LiteralString, cast
-from uuid import uuid4
+
 
 import psycopg
 import pytest
@@ -23,11 +23,10 @@ def db():
         pytest.skip("TEST_DATABASE_URL is required for PostgreSQL integration tests")
     with psycopg.connect(url) as conn:
         try:
-            schema = "search_test_" + uuid4().hex
-            conn.execute(sql.SQL("CREATE SCHEMA {}").format(sql.Identifier(schema)))
-            conn.execute(sql.SQL("SET LOCAL search_path TO {}").format(sql.Identifier(schema)))
-            migration = (Path(__file__).parents[1] / "backend/migrations/001_opportunities.sql").read_text()
-            conn.execute(sql.SQL(cast(LiteralString, migration.removeprefix("BEGIN;").replace("COMMIT;", ""))))
+            # Dedicated disposable database: never drop or reuse an existing catalog.
+            migration = (Path(__file__).parents[1] / "backend/migrations/002_content_catalog.sql").read_text()
+            migration = migration.replace("BEGIN;", "", 1).rsplit("COMMIT;", 1)[0]
+            conn.execute(sql.SQL(cast(LiteralString, migration)))
             yield conn
         finally:
             conn.rollback()
@@ -35,10 +34,25 @@ def db():
 
 def add(db, id, **changes):
     data = dict(id=id, title="WIT beginner coding workshop", description="Build coding projects",
-                source_url="https://example.org/opportunity", opportunity_type="workshop",
-                location_mode="online", location_name="Zoom", tags=["coding"])
+                url="https://example.org/opportunity", category="workshop",
+                location_mode="online", location="Zoom", tags=["coding"], content_kind="opportunity", organization="Demo",
+                source="Test fixture", last_updated="2026-11-09", eligibility_status="unrestricted")
+    for old, new in {"source_url": "url", "opportunity_type": "category",
+                     "location_name": "location", "application_deadline": "deadline_at"}.items():
+        if old in changes:
+            changes[new] = changes.pop(old)
     data.update(changes)
-    db.execute(sql.SQL("INSERT INTO opportunities ({}) VALUES ({})").format(
+    if not data["description"]:
+        data["description"] = "Fixture description"
+    if data.get("starts_at"):
+        data.setdefault("schedule_precision", "time")
+        data.setdefault("timezone", "America/New_York")
+    if data.get("deadline_at") or data.get("deadline_date"):
+        data.setdefault("deadline_status", "fixed")
+        data.setdefault("deadline_timezone", "America/New_York")
+    if any(data.get(k) for k in ("eligible_majors", "eligible_years", "experience_levels", "eligibility")):
+        data["eligibility_status"] = "restricted"
+    db.execute(sql.SQL("INSERT INTO catalog.content_items ({}) VALUES ({})").format(
         sql.SQL(",").join(map(sql.Identifier, data)),
         sql.SQL(",").join(sql.Placeholder() for _ in data)), list(data.values()))
 
@@ -64,7 +78,7 @@ def test_lexical_phrases_acronyms_and_trigger_updates(db):
     add(db, "other", title="Music workshop", description="Play piano", tags=["music"])
     assert ids(db, SearchFilters(query='WIT "beginner coding"')) == ["coding"]
     assert ids(db, SearchFilters(query="piano")) == ["other"]
-    db.execute("UPDATE opportunities SET title = 'Robotics' WHERE id = 'other'")
+    db.execute("UPDATE catalog.content_items SET title = 'Robotics' WHERE id = 'other'")
     assert ids(db, SearchFilters(query="robotics")) == ["other"]
     assert ids(db, SearchFilters(query="nonexistent")) == []
 
@@ -175,3 +189,76 @@ def test_inferred_start_window_intersects_explicit_deadline_window(db):
                             date_from='2026-11-02T00:00:00-05:00',
                             date_to='2026-11-03T00:00:00-05:00')
     assert [r['id'] for r in search_opportunities(db, filters, now=now)] == ['match']
+
+def test_catalog_kinds_and_compatibility_fields(db):
+    add(db, 'program', content_kind='program', category='mentorship', location_mode='hybrid')
+    add(db, 'resource', content_kind='resource', category='guide',
+        schedule_precision='not-applicable', location_mode='not-applicable', location=None,
+        deadline_status='none')
+    rows = search_opportunities(db, SearchFilters(content_kinds=['program'], categories=['mentorship'],
+                                                  location_modes=['hybrid']))
+    assert [r['id'] for r in rows] == ['program']
+    assert rows[0]['category'] == rows[0]['opportunity_type'] == 'mentorship'
+    assert rows[0]['url'] == rows[0]['source_url']
+    assert 'search_vector' not in rows[0]
+    assert ids(db, SearchFilters(content_kinds=['resource'])) == ['resource']
+
+def test_unknown_and_unparsed_eligibility_are_not_recommended(db):
+    add(db, 'unknown', eligibility_status='unknown')
+    add(db, 'prose', eligibility=['Requires faculty approval'])
+    add(db, 'open')
+    assert set(ids(db)) == {'unknown', 'prose', 'open'}
+    assert ids(db, profile=StudentProfile()) == ['open']
+
+def test_date_only_deadline_dst_and_expired_events(db):
+    add(db, 'deadline', deadline_date='2026-11-01')
+    add(db, 'event', content_kind='event', schedule_precision='date',
+        start_date='2026-11-01', timezone='America/New_York')
+    before = datetime.fromisoformat('2026-11-02T04:59:59+00:00')
+    after = datetime.fromisoformat('2026-11-02T05:00:00+00:00')
+    assert {r['id'] for r in search_opportunities(db, SearchFilters(), now=before)} == {'deadline', 'event'}
+    assert search_opportunities(db, SearchFilters(), now=after) == []
+    assert len(search_opportunities(db, SearchFilters(include_expired=True), now=after)) == 2
+
+def test_date_only_query_preserves_precision(db):
+    add(db, 'date', content_kind='event', schedule_precision='date',
+        start_date='2026-11-02', timezone='America/New_York')
+    add(db, 'outside', content_kind='event', schedule_precision='date',
+        start_date='2026-11-09', timezone='America/New_York')
+    now = datetime.fromisoformat('2026-10-31T12:00:00-04:00')
+    rows = search_opportunities(db, SearchFilters(query='next week'), now=now)
+    assert [r['id'] for r in rows] == ['date']
+    assert rows[0]['starts_at'] is None
+    assert str(rows[0]['start_date']) == '2026-11-02'
+
+def test_new_seed_is_standalone_and_repeatable(db):
+    seed = (Path(__file__).parents[1] / 'content/seed_catalog_demo.sql').read_text()
+    seed = seed.replace('BEGIN;', '', 1).rsplit('COMMIT;', 1)[0]
+    for _ in range(2):
+        db.execute(sql.SQL(cast(LiteralString, seed)))
+    assert db.execute('SELECT count(*) FROM catalog.content_items').fetchone()[0] == 20
+    assert {r['content_kind'] for r in search_opportunities(db, SearchFilters(include_expired=True))} == {
+        'opportunity', 'event', 'program', 'resource'}
+
+def test_api_serializes_catalog_dates_and_compatibility_fields(db, monkeypatch):
+    from contextlib import contextmanager
+    from fastapi.testclient import TestClient
+    from backend.app.main import app
+
+    add(db, 'api', content_kind='program', schedule_precision='date',
+        start_date='2027-06-01', timezone='America/New_York')
+
+    @contextmanager
+    def connect(*args, **kwargs):
+        yield db
+
+    monkeypatch.setenv('DATABASE_URL', 'test-connection')
+    monkeypatch.setattr('backend.app.main.psycopg.connect', connect)
+    client = TestClient(app)
+    response = client.post('/api/search', json={'content_kinds': ['program']})
+    assert response.status_code == 200
+    item = response.json()['items'][0]
+    assert item['start_date'] == '2027-06-01'
+    assert item['starts_at'] is None
+    assert item['source_url'] == item['url']
+    assert client.post('/api/recommendations', json={'profile': {}}).json()['items'][0]['id'] == 'api'

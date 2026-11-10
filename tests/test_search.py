@@ -10,7 +10,7 @@ from search.service import SearchFilters, StudentProfile, build_search, explain_
 
 @pytest.mark.parametrize("values", [
     {"limit": 0}, {"limit": 101}, {"offset": -1}, {"academic_years": [5]},
-    {"timeline": "title"}, {"location_modes": ["hybrid"]},
+    {"timeline": "title"}, {"location_modes": ["invalid"]},
     {"date_from": "2026-11-01T10:00:00"},
     {"date_from": "2026-12-01T00:00:00Z", "date_to": "2026-11-01T00:00:00Z"},
 ])
@@ -22,12 +22,12 @@ def test_invalid_filters(values):
 def test_default_deadline_and_explicit_override():
     now = datetime(2026, 10, 30, tzinfo=timezone.utc)
     sql, params = build_search(SearchFilters(), now=now)
-    assert "application_deadline >= %(now)s" in sql
+    assert "deadline_at >= %(now)s" in sql
     assert params["now"] == now
     sql, _ = build_search(SearchFilters(include_expired=True))
-    assert "application_deadline >= %(now)s" not in sql
+    assert "deadline_at >= %(now)s" not in sql
     sql, _ = build_search(SearchFilters(include_expired=True), StudentProfile())
-    assert "application_deadline >= %(now)s" in sql
+    assert "deadline_at >= %(now)s" in sql
 
 
 def test_values_are_parameters_and_unknown_eligibility_is_conservative():
