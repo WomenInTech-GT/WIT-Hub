@@ -1,0 +1,128 @@
+﻿id,level,field,code,detail
+WIT-001,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-001,review,url,link_inconclusive,Connection failed: URLError
+WIT-002,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-002,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-002,review,url,link_inconclusive,Connection failed: URLError
+WIT-003,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-003,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-003,review,url,link_inconclusive,Connection failed: URLError
+WIT-004,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-004,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-004,review,url,link_inconclusive,Connection failed: URLError
+WIT-005,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-005,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-005,review,url,link_inconclusive,Connection failed: URLError
+WIT-006,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-006,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-006,review,url,link_inconclusive,Connection failed: URLError
+WIT-007,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-007,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-007,review,url,link_inconclusive,Connection failed: URLError
+WIT-008,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-008,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-008,review,url,link_inconclusive,Connection failed: URLError
+WIT-009,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-009,review,url,link_inconclusive,Connection failed: URLError
+WIT-010,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-010,review,url,link_inconclusive,Connection failed: URLError
+WIT-011,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-011,review,url,link_inconclusive,Connection failed: URLError
+WIT-012,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-012,review,url,link_inconclusive,Connection failed: URLError
+WIT-013,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-013,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-013,review,url,link_inconclusive,Connection failed: URLError
+WIT-014,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-014,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-014,review,url,link_inconclusive,Connection failed: URLError
+WIT-015,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-015,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-015,review,url,link_inconclusive,Connection failed: URLError
+WIT-016,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-016,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-016,review,url,link_inconclusive,Connection failed: URLError
+WIT-017,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-017,review,url,link_inconclusive,Connection failed: URLError
+WIT-018,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-018,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-018,review,url,link_inconclusive,Connection failed: URLError
+WIT-019,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-019,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-019,review,url,link_inconclusive,Connection failed: URLError
+WIT-020,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-020,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-021,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-021,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-022,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-022,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-023,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-023,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-024,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-024,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-025,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-026,warning,event_date,past_event,Event date 2026-11-12 is before 2026-11-13
+WIT-026,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-027,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-028,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-028,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-029,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-029,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-030,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-030,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-031,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-031,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-031,review,url,link_inconclusive,Connection failed: URLError
+WIT-032,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-032,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-033,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-033,review,event_date,event_date_unconfirmed,Original value: 2027-01 (date TBD)
+WIT-035,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-035,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-036,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-036,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-037,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-037,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-038,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-038,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-039,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-039,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-040,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-040,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-041,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-041,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-042,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-042,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-043,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-043,review,event_date,event_date_unconfirmed,Original value: Not scheduled
+WIT-044,warning,event_date,past_event,Event date 2026-11-12 is before 2026-11-13
+WIT-044,warning,deadline,past_deadline,Deadline 2026-11-11 is before 2026-11-13
+WIT-045,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-046,warning,event_date,past_event,Event date 2026-11-10 is before 2026-11-13
+WIT-046,warning,deadline,past_deadline,Deadline 2026-11-09 is before 2026-11-13
+WIT-047,warning,event_date,past_event,Event date 2026-11-12 is before 2026-11-13
+WIT-047,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-048,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-049,warning,event_date,past_event,Event date 2026-11-11 is before 2026-11-13
+WIT-049,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-050,warning,event_date,past_event,Event date 2026-11-11 is before 2026-11-13
+WIT-050,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-051,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-052,warning,event_date,past_event,Event date 2026-11-12 is before 2026-11-13
+WIT-052,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-053,warning,event_date,past_event,Event date 2026-11-10 is before 2026-11-13
+WIT-053,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-054,warning,event_date,past_event,Event date 2026-11-12 is before 2026-11-13
+WIT-054,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-055,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-056,warning,event_date,past_event,Event date 2026-11-10 is before 2026-11-13
+WIT-056,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-057,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-058,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-059,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-060,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-061,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-062,warning,event_date,past_event,Event date 2026-11-12 is before 2026-11-13
+WIT-062,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-063,review,deadline,deadline_unconfirmed,Original value: Not announced
+WIT-064,review,deadline,deadline_unconfirmed,Original value: Not announced
