@@ -1,0 +1,21 @@
+{
+  "checked_on": "2026-11-13",
+  "records": 64,
+  "issues_by_level": {
+    "review": 114,
+    "warning": 13
+  },
+  "issues_by_code": {
+    "event_date_unconfirmed": 39,
+    "link_inconclusive": 20,
+    "deadline_unconfirmed": 55,
+    "past_event": 11,
+    "past_deadline": 2
+  },
+  "http_link_checks": {
+    "links_tested": 10,
+    "unique_links_tested": 10,
+    "link_checks_enabled": true
+  },
+  "disclaimer": "Not an approval to publish/import. All data is in draft review; HTTP checks do not confirm URL content matches opportunity."
+}
