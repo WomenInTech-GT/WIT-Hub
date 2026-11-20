@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "schema_status": "DRAFT — NOT APPROVED",
+    "exported_at_utc": "2026-11-13T04:56:13+00:00",
+    "warning": "Do not import into staging until final schema mapping, eligibility and editorial approval."
+  },
+  "projects": [
+    {
+      "id": "PRJ-001",
+      "title": "Hearo — At-Home Smart Ear Exam",
+      "year": 2026,
+      "type": "Healthcare Hardware",
+      "team": "Hearo student team",
+      "summary": "A redesigned smart otoscope concept helps parents capture at-home ear images that clinicians can use.",
+      "problem": "Families often need professional clinic visits to examine possible ear infections.",
+      "solution": "The team developed an easier-to-use at-home ear imaging device designed for caregivers and clinician review.",
+      "technologies": [
+        "Medical device",
+        "imaging hardware",
+        "user-centered design"
+      ],
+      "url": "https://news.gatech.edu/news/2026/03/12/ear-innovation-hearo-wins-inventure-prize-home-ear-exam",
+      "publication_permission": "unconfirmed",
+      "publication_status": "draft_review"
+    },
+    {
+      "id": "PRJ-002",
+      "title": "PedalSwap — Modular Guitar Effects System",
+      "year": 2026,
+      "type": "Electronics Hardware",
+      "team": "PedalSwap student team",
+      "summary": "A modular effects-pedal platform with interchangeable components offers musicians a flexible alternative to separate pedals.",
+      "problem": "Buying separate guitar pedals can be costly and makes experimenting with effects cumbersome.",
+      "solution": "Interchangeable effect components connect to a common pedal platform so musicians can experiment with configurations.",
+      "technologies": [
+        "Modular electronics",
+        "music technology",
+        "physical product design"
+      ],
+      "url": "https://news.gatech.edu/news/2026/01/05/home-cervical-cancer-screening-prototype-wins-i2p-showcase",
+      "publication_permission": "unconfirmed",
+      "publication_status": "draft_review"
+    },
+    {
+      "id": "PRJ-003",
+      "title": "DoorTix — Ticket-Purchasing Automation",
+      "year": 2026,
+      "type": "Software / Applied Computing",
+      "team": "DoorTix student team",
+      "summary": "An automated ticket-purchasing concept is designed to help fans find seats under user-defined price preferences.",
+      "problem": "Ticket purchasing can be difficult to navigate, with unpredictable prices and limited transparency.",
+      "solution": "A concierge-like tool aims to secure event tickets at prices specified by customers.",
+      "technologies": [
+        "Software automation",
+        "consumer applications"
+      ],
+      "url": "https://news.gatech.edu/news/2026/03/12/ear-innovation-hearo-wins-inventure-prize-home-ear-exam",
+      "publication_permission": "unconfirmed",
+      "publication_status": "draft_review"
+    },
+    {
+      "id": "PRJ-004",
+      "title": "Matareal — Mural Paint Estimation",
+      "year": 2026,
+      "type": "Design Computing",
+      "team": "Matareal student team",
+      "summary": "A tool converts mural designs into estimates of required paint, reducing the time needed to plan large artwork.",
+      "problem": "Artists can spend significant time calculating paint amounts for mural projects.",
+      "solution": "The team built a paint estimation tool to support faster, more consistent mural planning.",
+      "technologies": [
+        "Design software",
+        "estimation",
+        "digital tooling"
+      ],
+      "url": "https://news.gatech.edu/news/2026/01/05/home-cervical-cancer-screening-prototype-wins-i2p-showcase",
+      "publication_permission": "unconfirmed",
+      "publication_status": "draft_review"
+    },
+    {
+      "id": "PRJ-005",
+      "title": "Convexity Electronics — Printed Circuit Board 3D Printer",
+      "year": 2025,
+      "type": "Additive Manufacturing / Electronics",
+      "team": "Convexity Electronics student team",
+      "summary": "An electronics 3D printer concept targets faster, more compact fabrication of printed circuit boards.",
+      "problem": "Conventional circuit-board manufacturing can have lead times and design constraints that slow prototyping.",
+      "solution": "The team developed a system for manufacturing 3D-printed circuit boards at scale.",
+      "technologies": [
+        "Additive manufacturing",
+        "printed electronics",
+        "hardware"
+      ],
+      "url": "https://news.gatech.edu/news/2025/03/13/convexity-wins-inventure-prize-electronics-3d-printer",
+      "publication_permission": "unconfirmed",
+      "publication_status": "draft_review"
+    },
+    {
+      "id": "PRJ-006",
+      "title": "StrideLink — Wearable Gait Monitoring",
+      "year": 2026,
+      "type": "Wearables / Biomechanics",
+      "team": "StrideLink student team",
+      "summary": "A wearable aims to support remote gait analysis by measuring walking asymmetry.",
+      "problem": "Physical therapists may lack convenient data about how a patient's gait changes outside clinical settings.",
+      "solution": "The team proposed a wearable monitoring platform focused on walking asymmetry and remote observation.",
+      "technologies": [
+        "Wearable sensing",
+        "gait analysis",
+        "biomedical engineering"
+      ],
+      "url": "https://inventureprize.gatech.edu/team/stridelink",
+      "publication_permission": "unconfirmed",
+      "publication_status": "draft_review"
+    },
+    {
+      "id": "PRJ-007",
+      "title": "NeuroChamp — Pediatric Seizure Monitoring Headband",
+      "year": 2024,
+      "type": "Medical Wearable",
+      "team": "NeuroChamp student team",
+      "summary": "A concealed headband wearable was created to help monitor pediatric seizures continuously.",
+      "problem": "Some seizures are difficult for caregivers and educators to notice in everyday situations.",
+      "solution": "A discreet wearable monitoring concept was developed to support early recognition of events.",
+      "technologies": [
+        "Wearable sensing",
+        "biomedical device development"
+      ],
+      "url": "https://news.gatech.edu/news/2024/03/28/neurochamp-wins-2024-acc-inventure-prize",
+      "publication_permission": "unconfirmed",
+      "publication_status": "draft_review"
+    },
+    {
+      "id": "PRJ-008",
+      "title": "PatchPals — Automated Wound-Care Foam Cutting",
+      "year": 2025,
+      "type": "Healthcare Robotics / Hardware",
+      "team": "PatchPals student team",
+      "summary": "An AI-assisted wound-care tool aims to automate custom foam dressing cutting.",
+      "problem": "Preparing dressings for chronic wounds can require time-consuming manual cutting.",
+      "solution": "A system uses wound imagery and a guided cutting mechanism to make more precise foam shapes.",
+      "technologies": [
+        "Image-assisted fabrication",
+        "healthcare hardware",
+        "automation"
+      ],
+      "url": "https://www.gatech.edu/news/2025/04/01/patchpals-pitches-wound-care-evolution-acc-inventure-prize",
+      "publication_permission": "unconfirmed",
+      "publication_status": "draft_review"
+    }
+  ]
+}
