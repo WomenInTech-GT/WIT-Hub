@@ -1,1 +1,372 @@
-.career-intro h1{margin-bottom:15px}.career-intro .eyebrow{margin-bottom:10px}.listing-grid{display:grid;gap:18px}.listing-grid.internships{grid-template-columns:repeat(2,1fr)}.listing-grid.projects{grid-template-columns:repeat(3,1fr)}.listing-grid.events{grid-template-columns:1fr}.listing{border:1px solid var(--line);background:white;border-radius:11px;overflow:hidden;display:flex;flex-direction:column}.listing-body{padding:20px;flex:1;display:flex;flex-direction:column}.listing-top{display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--muted);font-size:10px}.company-icon{display:inline-grid;place-items:center;width:30px;height:30px;background:#eef3e9;border-radius:5px;color:var(--green);font-size:19px;margin-right:8px}.listing h3{font-size:20px;margin:15px 0 8px}.listing p{font-size:11px;color:var(--muted);line-height:1.65;margin:5px 0 12px}.listing .metadata{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:10px 0 18px;font-size:11px;line-height:1.7}.metadata small{display:block;font-size:8px;color:var(--muted);letter-spacing:.5px}.listing-bottom{margin-top:auto;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:9px;color:var(--muted)}.text-button{border:0;background:transparent;color:var(--green);padding:3px 0;cursor:pointer;font:inherit;font-size:10px}.save{border:0;background:transparent;cursor:pointer;color:var(--green);font-size:17px}.save[aria-pressed=true]{color:#9b7c16}.project-image{height:150px;width:100%;object-fit:cover}.listing .tag{font-size:8px}.projects .listing h3{font-size:18px}.project-facts{font-size:10px;color:var(--green);line-height:1.9;margin-bottom:13px}.month-heading{display:flex;justify-content:space-between;margin:25px 0 18px;font-size:17px}.month-heading small{font-size:10px;color:var(--muted)}.event-row{display:grid;grid-template-columns:65px 1fr 150px 90px;gap:18px;align-items:center;padding:20px}.event-row h3{font-size:18px;margin:8px 0}.event-row p{margin-bottom:0}.date-box{background:#f0f3e9;border-radius:5px;text-align:center;padding:10px 5px;color:var(--green)}.date-box span{font-size:10px;display:block}.date-box strong{font-size:28px;font-weight:400;display:block}.event-meta{font-size:10px;color:var(--muted);line-height:2}.event-action .button{background:white;border:1px solid var(--line);color:var(--green);padding:10px;font-size:10px;cursor:pointer}.event-action small{display:block;font-size:8px;color:var(--muted);margin-top:9px}.tip{display:flex;align-items:center;gap:15px;background:var(--yellow);border-radius:9px;padding:19px;margin:20px 0 28px}.tip>span{font-size:25px}.tip strong{font-size:13px;font-weight:500}.tip p{font-size:10px;color:var(--muted);margin:6px 0 0}.tip a{margin-left:auto;font-size:10px;white-space:nowrap}.sample-note{background:var(--yellow);padding:12px;border-radius:6px;font-size:12px}.close-detail{border:0;cursor:pointer}#empty{text-align:center;padding:30px;color:var(--muted)}@media(max-width:900px){.listing-grid.projects{grid-template-columns:repeat(2,1fr)}.event-row{grid-template-columns:55px 1fr 110px}.event-meta{grid-column:2}.event-action{grid-column:3;grid-row:1 / span 2}}@media(max-width:580px){.listing-grid.internships,.listing-grid.projects{grid-template-columns:1fr}.event-row{grid-template-columns:48px 1fr;padding:15px;gap:12px}.event-action{grid-column:2;grid-row:auto}.event-meta{grid-column:2}.tip{flex-wrap:wrap}.tip a{margin-left:0}.project-image{height:190px}}
+.career-intro h1 {
+    margin-bottom: 15px
+}
+
+.career-intro .eyebrow {
+    margin-bottom: 10px
+}
+
+.listing-grid {
+    display: grid;
+    gap: 18px
+}
+
+.listing-grid.internships {
+    grid-template-columns: repeat(2, 1fr)
+}
+
+.listing-grid.projects {
+    grid-template-columns: repeat(3, 1fr)
+}
+
+.listing-grid.events {
+    grid-template-columns: 1fr
+}
+
+.listing {
+    border: 1px solid var(--line);
+    background: white;
+    border-radius: 11px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column
+}
+
+.listing-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column
+}
+
+.listing-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    color: var(--muted);
+    font-size: 11px
+}
+
+.company-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    background: #eef3e9;
+    border-radius: 5px;
+    color: var(--green);
+    font-size: 20.9px;
+    margin-right: 8px
+}
+
+.listing h3 {
+    font-size: 22px;
+    margin: 15px 0 8px
+}
+
+.listing p {
+    font-size: 12.1px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin: 5px 0 12px
+}
+
+.listing .metadata {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 10px 0 18px;
+    font-size: 12.1px;
+    line-height: 1.7
+}
+
+.metadata small {
+    display: block;
+    font-size: 8.8px;
+    color: var(--muted);
+    letter-spacing: .5px
+}
+
+.listing-bottom {
+    margin-top: auto;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 9.9px;
+    color: var(--muted)
+}
+
+.text-button {
+    border: 0;
+    background: transparent;
+    color: var(--green);
+    padding: 3px 0;
+    cursor: pointer;
+    font: inherit;
+    font-size: 11px
+}
+
+.save {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: var(--green);
+    font-size: 18.7px
+}
+
+.save[aria-pressed=true] {
+    color: #9b7c16
+}
+
+.project-image {
+    height: 150px;
+    width: 100%;
+    object-fit: cover
+}
+
+.listing .tag {
+    font-size: 8.8px
+}
+
+.projects .listing h3 {
+    font-size: 19.8px
+}
+
+.project-facts {
+    font-size: 11px;
+    color: var(--green);
+    line-height: 1.9;
+    margin-bottom: 13px
+}
+
+.month-heading {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0 18px;
+    font-size: 18.7px
+}
+
+.month-heading small {
+    font-size: 11px;
+    color: var(--muted)
+}
+
+.event-row {
+    display: grid;
+    grid-template-columns: 65px 1fr 150px 90px;
+    gap: 18px;
+    align-items: center;
+    padding: 20px
+}
+
+.event-row h3 {
+    font-size: 19.8px;
+    margin: 8px 0
+}
+
+.event-row p {
+    margin-bottom: 0
+}
+
+.date-box {
+    background: #f0f3e9;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px 5px;
+    color: var(--green)
+}
+
+.date-box span {
+    font-size: 11px;
+    display: block
+}
+
+.date-box strong {
+    font-size: 30.8px;
+    font-weight: 400;
+    display: block
+}
+
+.event-meta {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 2
+}
+
+.event-action .button {
+    background: white;
+    border: 1px solid var(--line);
+    color: var(--green);
+    padding: 10px;
+    font-size: 11px;
+    cursor: pointer
+}
+
+.event-action small {
+    display: block;
+    font-size: 8.8px;
+    color: var(--muted);
+    margin-top: 9px
+}
+
+.tip {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--yellow);
+    border-radius: 9px;
+    padding: 19px;
+    margin: 20px 0 28px
+}
+
+.tip>span {
+    font-size: 27.5px
+}
+
+.tip strong {
+    font-size: 14.3px;
+    font-weight: 500
+}
+
+.tip p {
+    font-size: 11px;
+    color: var(--muted);
+    margin: 6px 0 0
+}
+
+.tip a {
+    margin-left: auto;
+    font-size: 11px;
+    white-space: nowrap
+}
+
+.sample-note {
+    background: var(--yellow);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13.2px
+}
+
+.close-detail {
+    border: 0;
+    cursor: pointer
+}
+
+#empty {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted)
+}
+
+@media(max-width:900px) {
+    .listing-grid.projects {
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+    .event-row {
+        grid-template-columns: 55px 1fr 110px
+    }
+
+    .event-meta {
+        grid-column: 2
+    }
+
+    .event-action {
+        grid-column: 3;
+        grid-row: 1 / span 2
+    }
+}
+
+@media(max-width:580px) {
+
+    .listing-grid.internships,
+    .listing-grid.projects {
+        grid-template-columns: 1fr
+    }
+
+    .event-row {
+        grid-template-columns: 48px 1fr;
+        padding: 15px;
+        gap: 12px
+    }
+
+    .event-action {
+        grid-column: 2;
+        grid-row: auto
+    }
+
+    .event-meta {
+        grid-column: 2
+    }
+
+    .tip {
+        flex-wrap: wrap
+    }
+
+    .tip a {
+        margin-left: 0
+    }
+
+    .project-image {
+        height: 190px
+    }
+}
+.project-info-card {
+    border-radius: 16px;
+}
+
+.project-info-card .listing-body {
+    padding: clamp(20px, 2.5vw, 32px);
+}
+
+.project-info-card .listing-top .tag {
+    padding: 7px 12px;
+    font-size: 0.875rem;
+}
+
+.projects .project-info-card h3 {
+    margin: 18px 0 12px;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    line-height: 1.2;
+}
+
+.project-info-card .listing-body > p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.listing.project-info-card ul.project-facts {
+    width: auto;
+    margin: 8px 0 20px;
+    font-size: 1.125rem;
+    line-height: 1.55;
+}
+
+.project-info-card .listing-bottom {
+    display: block;
+    padding-top: 14px;
+}
+
+.project-info-card summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.project-source {
+    align-self: flex-start;
+    margin-block-end: 14px;
+    color: var(--green);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.project-info-card details[open] .project-details-arrow {
+    transform: rotate(180deg);
+}
