@@ -11,20 +11,20 @@
 }
 
 .about-copy .eyebrow {
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 1px;
     margin-bottom: 18px
 }
 
 .about-copy h1 {
-    font-size: clamp(36px, 4.4vw, 52px);
+    font-size: clamp(39.6px, 4.84vw, 57.2px);
     line-height: 1.05;
     letter-spacing: -1.5px;
     margin-bottom: 24px
 }
 
 .about-copy p:not(.eyebrow) {
-    font-size: 13px;
+    font-size: 14.3px;
     line-height: 1.8;
     color: var(--muted);
     max-width: 530px
@@ -32,13 +32,13 @@
 
 .about-copy p.about-lead {
     color: var(--ink);
-    font-size: 15px
+    font-size: 16.5px
 }
 
 .meet-link {
     display: inline-block;
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 13.2px;
     font-weight: 600;
     color: var(--green)
 }
@@ -64,18 +64,18 @@
 }
 
 .team-heading .eyebrow {
-    font-size: 9px;
+    font-size: 9.9px;
     letter-spacing: 1px;
     margin-bottom: 10px
 }
 
 .team-heading h2 {
-    font-size: 32px;
+    font-size: 35.2px;
     font-weight: 500
 }
 
 .team-heading p:not(.eyebrow) {
-    font-size: 13px;
+    font-size: 14.3px;
     color: var(--muted);
     line-height: 1.7;
     margin-bottom: 0
@@ -86,7 +86,7 @@
 }
 
 .team-heading aside p:not(.eyebrow) {
-    font-size: 11px
+    font-size: 12.1px
 }
 
 .team-grid {
@@ -109,20 +109,20 @@
 }
 
 .team-card h3 {
-    font-size: 18px;
+    font-size: 19.8px;
     font-weight: 600;
     margin: 0 0 7px
 }
 
 .team-card .team-role {
     color: var(--green);
-    font-size: 11px;
+    font-size: 12.1px;
     font-weight: 600;
     margin: 0 0 12px
 }
 
 .team-card p {
-    font-size: 11px;
+    font-size: 12.1px;
     color: var(--muted);
     line-height: 1.7;
     margin: 0
@@ -140,18 +140,18 @@
 }
 
 .about-cta .eyebrow {
-    font-size: 9px;
+    font-size: 9.9px;
     color: var(--yellow);
     letter-spacing: .5px;
     margin-bottom: 13px
 }
 
 .about-cta h2 {
-    font-size: 29px
+    font-size: 31.9px
 }
 
 .about-cta p:not(.eyebrow) {
-    font-size: 11px;
+    font-size: 12.1px;
     line-height: 1.7;
     color: #d4e1dc;
     margin: 12px 0 0
@@ -160,14 +160,14 @@
 .about-cta small {
     display: block;
     text-align: center;
-    font-size: 9px;
+    font-size: 9.9px;
     color: #d4e1dc;
     margin-top: 12px
 }
 
 .about-connect {
     text-align: center;
-    font-size: 11px;
+    font-size: 12.1px;
     color: var(--muted);
     padding: 10px 0 28px;
     line-height: 1.8
@@ -234,7 +234,7 @@
     }
 
     .about-cta h2 {
-        font-size: 25px
+        font-size: 27.5px
     }
 
     .about-connect a {
@@ -265,4 +265,7 @@
         height: 220px
     }
 }
-.about-main>.about-hero:first-child{padding-top:36px}
+
+.about-main>.about-hero:first-child {
+    padding-top: 36px
+}
