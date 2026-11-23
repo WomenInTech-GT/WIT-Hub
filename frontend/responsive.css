@@ -1,0 +1,56 @@
+/* Fluid containers share consistent gutters across every page. */
+.container,
+.container.career-main,
+.container.about-main,
+.site-header-inner {
+    width: calc(100% - clamp(32px, 6vw, 160px));
+    max-width: 1600px;
+    margin-inline: auto;
+}
+
+.hero {
+    gap: clamp(24px, 4vw, 64px);
+    padding-block: clamp(28px, 3vw, 48px);
+}
+
+.hero > *,
+.listing-grid > *,
+.guide-grid > *,
+.cards > * {
+    min-width: 0;
+}
+
+.hero h1 {
+    max-width: 14ch;
+}
+
+.hero .intro {
+    max-width: 52ch;
+}
+
+.hero-visual > img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.opportunities {
+    padding-top: 8px;
+}
+
+@media (min-width: 1500px) {
+    .listing-grid.projects,
+    .guide-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero h1 {
+        max-width: 18ch;
+    }
+}

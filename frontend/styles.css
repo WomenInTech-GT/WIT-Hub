@@ -21,7 +21,7 @@ body {
     background: var(--paper);
     color: var(--ink);
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px
+    font-size: 15.4px
 }
 
 a {
@@ -63,7 +63,7 @@ input:focus-visible {
     display: flex;
     align-items: center;
     gap: 9px;
-    font-size: 25px;
+    font-size: 27.5px;
     white-space: nowrap
 }
 
@@ -75,7 +75,7 @@ input:focus-visible {
     border-radius: 6px;
     width: 27px;
     height: 27px;
-    font-size: 23px
+    font-size: 25.3px
 }
 
 .navbar nav,
@@ -83,7 +83,7 @@ input:focus-visible {
     display: flex;
     align-items: center;
     gap: 26px;
-    font-size: 12px
+    font-size: 13.2px
 }
 
 .nav-actions {
@@ -99,7 +99,7 @@ input:focus-visible {
     border-radius: 6px;
     background: var(--green);
     color: white;
-    font-size: 12px
+    font-size: 13.2px
 }
 
 .hero {
@@ -111,14 +111,14 @@ input:focus-visible {
 }
 
 .eyebrow {
-    font-size: 9px;
+    font-size: 9.9px;
     font-weight: 700;
     color: var(--green);
     margin: 0 0 20px
 }
 
 h1 {
-    font-size: clamp(36px, 4.8vw, 58px);
+    font-size: clamp(39.6px, 5.28vw, 63.8px);
     letter-spacing: -1px;
     line-height: 1.03;
     margin: 0 0 25px;
@@ -126,7 +126,7 @@ h1 {
 }
 
 .intro {
-    font-size: 15px;
+    font-size: 16.5px;
     line-height: 1.6;
     color: var(--muted);
     max-width: 445px;
@@ -149,7 +149,7 @@ h1 {
     min-width: 0;
     border: 0;
     background: transparent;
-    font-size: 12px;
+    font-size: 13.2px;
     padding: 10px 0;
     color: var(--ink)
 }
@@ -165,7 +165,7 @@ h1 {
 
 .help {
     display: block;
-    font-size: 11px;
+    font-size: 12.1px;
     color: var(--muted);
     margin-top: 20px
 }
@@ -190,7 +190,7 @@ h1 {
     background: white;
     padding: 10px 13px;
     border-radius: 25px;
-    font-size: 9px;
+    font-size: 9.9px;
     font-weight: bold
 }
 
@@ -204,7 +204,7 @@ h1 {
     display: flex;
     gap: 15px;
     align-items: center;
-    font-size: 15px;
+    font-size: 16.5px;
     box-shadow: 0 8px 18px #213f3b09
 }
 
@@ -215,12 +215,12 @@ h1 {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    font-size: 23px
+    font-size: 25.3px
 }
 
 .note small {
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     margin-top: 5px
 }
 
@@ -228,12 +228,12 @@ h1 {
     position: absolute;
     right: 0;
     bottom: -37px;
-    font-size: 8px;
+    font-size: 8.8px;
     color: var(--muted)
 }
 
 h2 {
-    font-size: 28px;
+    font-size: 30.8px;
     font-weight: 400;
     margin: 0;
     line-height: 1.2
@@ -256,7 +256,7 @@ h2 {
 }
 
 .section-heading>a {
-    font-size: 11px;
+    font-size: 12.1px;
     color: var(--green);
     white-space: nowrap
 }
@@ -276,7 +276,7 @@ h2 {
 }
 
 .tabs a {
-    font-size: 10px;
+    font-size: 11px;
     border: 1px solid var(--line);
     border-radius: 25px;
     padding: 8px 13px;
@@ -290,7 +290,7 @@ h2 {
 }
 
 .filters>small {
-    font-size: 9px;
+    font-size: 9.9px;
     color: var(--muted);
     white-space: nowrap
 }
@@ -339,7 +339,7 @@ h2 {
     display: inline-block;
     border-radius: 15px;
     background: #e0eeea;
-    font-size: 9px;
+    font-size: 9.9px;
     padding: 5px 8px;
     color: var(--green)
 }
@@ -350,20 +350,20 @@ h2 {
 }
 
 h3 {
-    font-size: 17px;
+    font-size: 18.7px;
     font-weight: 400;
     margin: 12px 0 5px
 }
 
 .card p {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--muted);
     line-height: 1.5;
     margin: 7px 0 12px
 }
 
 .card strong {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600
 }
 
@@ -371,7 +371,7 @@ h3 {
     border-top: 1px solid var(--line);
     margin-top: 12px;
     padding-top: 12px;
-    font-size: 9px;
+    font-size: 9.9px;
     color: var(--muted)
 }
 
@@ -388,17 +388,17 @@ h3 {
 
 .match .eyebrow {
     color: var(--yellow);
-    font-size: 8px;
+    font-size: 8.8px;
     margin-bottom: 17px
 }
 
 .match h2 {
     font-weight: 600;
-    font-size: 30px
+    font-size: 33px
 }
 
 .match p:not(.eyebrow) {
-    font-size: 12px;
+    font-size: 13.2px;
     line-height: 1.6;
     color: #d2e0dc;
     max-width: 570px;
@@ -419,7 +419,7 @@ h3 {
 .match-action span {
     border: 1px solid #75948c;
     border-radius: 20px;
-    font-size: 10px;
+    font-size: 11px;
     padding: 6px 10px;
     color: var(--yellow)
 }
@@ -431,13 +431,13 @@ h3 {
 }
 
 .pale b {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 400
 }
 
 .match-action small {
     display: block;
-    font-size: 9px;
+    font-size: 9.9px;
     color: #c3d4cf;
     margin-top: 15px
 }
@@ -447,7 +447,7 @@ h3 {
 }
 
 .resources h2 {
-    font-size: 26px
+    font-size: 28.6px
 }
 
 .resource-grid {
@@ -466,29 +466,29 @@ h3 {
 
 .resource-icon {
     color: var(--green);
-    font-size: 20px;
+    font-size: 22px;
     display: block
 }
 
 .resource-icon i {
     float: right;
-    font-size: 14px;
+    font-size: 15.4px;
     font-style: normal
 }
 
 .resource h3 {
-    font-size: 15px;
+    font-size: 16.5px;
     font-weight: 600
 }
 
 .resource p {
-    font-size: 11px;
+    font-size: 12.1px;
     color: var(--muted);
     line-height: 1.6
 }
 
 .resource small {
-    font-size: 9px;
+    font-size: 9.9px;
     color: var(--muted)
 }
 
@@ -506,7 +506,7 @@ footer {
 }
 
 .footer-content .logo {
-    font-size: 19px
+    font-size: 20.9px
 }
 
 .footer-content .logo-icon {
@@ -515,13 +515,13 @@ footer {
 
 .logo small {
     display: block;
-    font-size: 8px;
+    font-size: 8.8px;
     margin-top: 3px
 }
 
 .footer-content p,
 .footer-content nav {
-    font-size: 10px
+    font-size: 11px
 }
 
 .footer-content nav {
@@ -550,7 +550,7 @@ a:hover {
     }
 
     h1 {
-        font-size: 42px
+        font-size: 46.2px
     }
 
     .hero-visual>img {
@@ -558,7 +558,7 @@ a:hover {
     }
 
     .note {
-        font-size: 12px;
+        font-size: 13.2px;
         padding: 14px
     }
 
@@ -571,7 +571,7 @@ a:hover {
     }
 
     .match h2 {
-        font-size: 26px
+        font-size: 28.6px
     }
 }
 
@@ -587,16 +587,16 @@ a:hover {
         width: 100%;
         justify-content: center;
         flex-wrap: wrap;
-        font-size: 11px
+        font-size: 12.1px
     }
 
     .nav-actions {
-        font-size: 11px;
+        font-size: 12.1px;
         gap: 12px
     }
 
     .logo {
-        font-size: 21px
+        font-size: 23.1px
     }
 
     .hero {
@@ -606,7 +606,7 @@ a:hover {
     }
 
     h1 {
-        font-size: 44px;
+        font-size: 48.4px;
         max-width: 540px
     }
 
@@ -624,7 +624,7 @@ a:hover {
 
     .note {
         left: -10px;
-        font-size: 15px
+        font-size: 16.5px
     }
 
     .cards {
@@ -642,7 +642,7 @@ a:hover {
 
     h2,
     .resources h2 {
-        font-size: 24px
+        font-size: 26.4px
     }
 
     .match {
@@ -672,7 +672,7 @@ a:hover {
     }
 
     .section-heading>a {
-        font-size: 10px
+        font-size: 11px
     }
 }
 
@@ -686,7 +686,7 @@ a:hover {
     }
 
     h1 {
-        font-size: 38px
+        font-size: 41.8px
     }
 
     .hero-visual>img {
@@ -694,7 +694,7 @@ a:hover {
     }
 
     .note {
-        font-size: 12px
+        font-size: 13.2px
     }
 
     .section-heading {
@@ -707,10 +707,144 @@ a:hover {
     }
 
     .match h2 {
-        font-size: 24px
+        font-size: 26.4px
     }
 }
-.empty-slot{padding:28px;border:1px dashed var(--line);border-radius:12px;background:#f3f6f1;color:var(--muted)}.empty-slot h3{color:var(--ink);font-size:17px}.empty-slot p{font-size:12px;line-height:1.7}.listing-grid>.empty-slot,.guide-grid>.empty-slot{grid-column:1/-1}.empty-feature{display:block!important}.empty-feature>div{padding:32px}button:disabled,input:disabled,select:disabled{opacity:.55;cursor:default}
+
+.empty-slot {
+    padding: 28px;
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    background: #f3f6f1;
+    color: var(--muted)
+}
+
+.empty-slot h3 {
+    color: var(--ink);
+    font-size: 18.7px
+}
+
+.empty-slot p {
+    font-size: 13.2px;
+    line-height: 1.7
+}
+
+.listing-grid>.empty-slot,
+.guide-grid>.empty-slot {
+    grid-column: 1/-1
+}
+
+.empty-feature {
+    display: block !important
+}
+
+.empty-feature>div {
+    padding: 32px
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+    opacity: .55;
+    cursor: default
+}
 
 /* Empty database slots retain the final card dimensions without sample content. */
-.blank-card{pointer-events:none}.blank-image{background:#e7eeea}.card-photo.blank-image{height:120px}.blank-title{height:22px;margin:16px 0 10px}.blank-copy{height:15px;margin:8px 0}.blank-meta{min-height:20px}.blank-footer{min-height:30px;border-top:1px solid var(--line);margin-top:18px}.blank-metadata{min-height:54px}.blank-facts{min-height:58px}.blank-date{height:78px}.blank-button{width:120px;height:38px;border:1px solid var(--line);border-radius:6px;margin-top:18px}.blank-feature>.blank-image{height:255px}.blank-feature>div:last-child{padding:27px}.blank-card .listing-body{min-height:245px}.blank-card.guide-card{min-height:204px}@media(max-width:520px){.blank-feature>.blank-image{height:190px}}@media(max-width:420px){.card-photo.blank-image{height:190px}}
+.blank-card {
+    pointer-events: none
+}
+
+.blank-image {
+    background: #e7eeea
+}
+
+.card-photo.blank-image {
+    height: 120px
+}
+
+.blank-title {
+    height: 22px;
+    margin: 16px 0 10px
+}
+
+.blank-copy {
+    height: 15px;
+    margin: 8px 0
+}
+
+.blank-meta {
+    min-height: 20px
+}
+
+.blank-footer {
+    min-height: 30px;
+    border-top: 1px solid var(--line);
+    margin-top: 18px
+}
+
+.blank-metadata {
+    min-height: 54px
+}
+
+.blank-facts {
+    min-height: 58px
+}
+
+.blank-date {
+    height: 78px
+}
+
+.blank-button {
+    width: 120px;
+    height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin-top: 18px
+}
+
+.blank-feature>.blank-image {
+    height: 255px
+}
+
+.blank-feature>div:last-child {
+    padding: 27px
+}
+
+.blank-card .listing-body {
+    min-height: 245px
+}
+
+.blank-card.guide-card {
+    min-height: 204px
+}
+
+@media(max-width:520px) {
+    .blank-feature>.blank-image {
+        height: 190px
+    }
+}
+
+@media(max-width:420px) {
+    .card-photo.blank-image {
+        height: 190px
+    }
+}
+/* Center each list as a group while keeping its bullets aligned. */
+:is(.card, .guide-card, .listing, .resource, .team-card) :is(ul, ol) {
+    width: fit-content;
+    max-width: 100%;
+    margin: 1rem auto;
+    padding-inline-start: 1.4em;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    text-align: start;
+    overflow-wrap: anywhere;
+}
+
+:is(.card, .guide-card, .listing, .resource, .team-card) li + li {
+    margin-top: 0.3em;
+}
+
+main:has(:is(.cards, .guide-grid, .listing-grid, .resource-grid, .team-grid)) + footer {
+    margin-block-start: clamp(1.5rem, 4vw, 3rem);
+}
