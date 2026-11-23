@@ -5,7 +5,7 @@ const pages = ['index', 'career-resources', 'internships', 'events', 'projects',
 
 export default defineConfig({
   base: './',
-  server: { port: 3000, strictPort: true },
+  server: { port: 4000, strictPort: true },
   build: {
     rollupOptions: {
       input: Object.fromEntries(pages.map(page => [
