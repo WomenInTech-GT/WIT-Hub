@@ -1,0 +1,700 @@
+{
+  "mode": "dry_run",
+  "records": 72,
+  "ready_to_publish": false,
+  "approved": 0,
+  "records_with_issues": 72,
+  "schema_review": {
+    "status": "pending",
+    "reviewed_by": null
+  },
+  "entries": [
+    {
+      "id": "WIT-001",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "deadline_timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "e18a0589b460101b5ba85a385d41a8913af25e91535ab0410ced22ca552ea4c3"
+    },
+    {
+      "id": "WIT-002",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "953cc33fcffe6ba734d3a2508633f696ebd66d178e560d53fb14b67b13c3dae0"
+    },
+    {
+      "id": "WIT-003",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "e1067ef1535801bdb2cf05d2041b2223532b6baee2bac84f042c1d2a9ec02da1"
+    },
+    {
+      "id": "WIT-004",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "b3e581d6b32e9dbed2e994b5ca7b9e7c55f59c6105b8050be555f1076f67bd8b"
+    },
+    {
+      "id": "WIT-005",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "54dda0a9ec7a2d18c79643a37fd91ecf5b9a4c35bcd6414b9828e3693b98de73"
+    },
+    {
+      "id": "WIT-006",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "e0c0096bf9cee1177d22600cd1af39dd5eb4997ef30d6c4efea0182803638c09"
+    },
+    {
+      "id": "WIT-007",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "7a6beee721f00278c93b5d1fd955f5c06eb7e711874b4a0bb6833d9b16bc0a68"
+    },
+    {
+      "id": "WIT-008",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "9dfc92d04099630391c2e02d91351db00a32c76d58cfd6074465edcf0565bab6"
+    },
+    {
+      "id": "WIT-009",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "deadline_timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "b88c40895a3c86f2eb2991888f7f2fe9252e7dabd0f4eebddbde302dc9e0bf14"
+    },
+    {
+      "id": "WIT-010",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "deadline_timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "a04e4bdb39f7512bf47f089e3f94acf6d57898d4f4868e4cfa95641068bdc977"
+    },
+    {
+      "id": "WIT-011",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "0f956d4591323dcc8f46ea68bd3f662ad09b09de10ac74ecfa955b7bead5a569"
+    },
+    {
+      "id": "WIT-012",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "deadline_timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "6244eb56f8637f37e9f6ef2b7243e13889098185822f202b8349c187fa4aa4fa"
+    },
+    {
+      "id": "WIT-013",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "event_date: events need a verified schedule before publication"
+      ],
+      "approval_digest": "48410770596a1686aa74c12b5830130e36dddd2d6157b0d13f5bd614aadb21df"
+    },
+    {
+      "id": "WIT-014",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "event_date: events need a verified schedule before publication"
+      ],
+      "approval_digest": "457849da13cf6207379f8ea03b6e22e99dcfce2bc03fb6238ee42719c517fd60"
+    },
+    {
+      "id": "WIT-015",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "c4c62b29af1d0d7a17229440e3e2735fbd0d2c73d4f8a4fc36aa73147817c25e"
+    },
+    {
+      "id": "WIT-016",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "event_date: events need a verified schedule before publication"
+      ],
+      "approval_digest": "c41bc9bb5fca4f55084ade60e330194e6efd10c9ad3d31120737d486f029d714"
+    },
+    {
+      "id": "WIT-017",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "deadline_timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "a516a31359d4c1ea648794f6af746e6d857bf29fbf6a9d6ea2226c26f9fa953b"
+    },
+    {
+      "id": "WIT-018",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "ca10498e6b73d266368bb1673d04a0d8216d05aa09ccae61a47388805cd4e831"
+    },
+    {
+      "id": "WIT-019",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "589aa75fe15f9acf6efb2bcc6d7233272f480366bf1279ed0307be24402c8290"
+    },
+    {
+      "id": "WIT-020",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "8ac9a3f7d14cf019ae6b981e817379e43047f9b4baac0c8b9788c150fd39c28d"
+    },
+    {
+      "id": "WIT-021",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "9acec0455762d45e72a38681c0d3a6a0dc613234d7a8337b531ad5684a1cd9eb"
+    },
+    {
+      "id": "WIT-022",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "1feb8ee6354b65efed342fb68242fa715a04bf6e5e270e2d495df584f900cb6d"
+    },
+    {
+      "id": "WIT-023",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "dc851f31412be39593e9dc5457a3ba495d9a545cfeacdd7256935ad37e5f8e93"
+    },
+    {
+      "id": "WIT-024",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "7acbc11ca354658b9028f40d4f9e56f3c0859391b69c072c70e0e75313051e1d"
+    },
+    {
+      "id": "WIT-025",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "deadline_timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "593d4952e6b0c8e7bd40178ddab22873c6acd44054a6b38f4f649ee4b413dd39"
+    },
+    {
+      "id": "WIT-026",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "3a64d8666fd01aebc0a8c451d4183e39e1f1bb2ee129235ec66e7e61278da25f"
+    },
+    {
+      "id": "WIT-027",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "cea958aae0f47236db3680d4086ec44f86bcf81e2c7c575911306b8368df0db7"
+    },
+    {
+      "id": "WIT-028",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "88f3f69f835dd4f699f5e005aff837669455fb78c9faee8641acda87e72befcd"
+    },
+    {
+      "id": "WIT-029",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "95b6425e4bc04b6f265fda6c862dbc82887d9d80a63e676ad40c9e6d09e06173"
+    },
+    {
+      "id": "WIT-030",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "74a085eade4f16e6eb1ef80475e81581f3e41040cfd0d9bce08521d088a58068"
+    },
+    {
+      "id": "WIT-031",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "ef62a1cb4f8b5ec4114d84394ea558acc2898ca0a4d046788d24e83be178cb61"
+    },
+    {
+      "id": "WIT-032",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "6e9a4ea34ad8e41274cc29abab06e612ea45b654148ccbb924c6aa881e94b0f3"
+    },
+    {
+      "id": "WIT-033",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "event_date: events need a verified schedule before publication"
+      ],
+      "approval_digest": "8644870bf72a3aa85e45c74cce9a1395d81cb2bc3a0241b57bee0cb2562bc467"
+    },
+    {
+      "id": "WIT-034",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)",
+        "deadline_timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "4acec07422d70d6673c590bab7e4bb7274b94f18367bc5fd2e39797294449302"
+    },
+    {
+      "id": "WIT-035",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "947aab38cce7984ace885f54231b165044ebf6ad3ffefa4d46c3a46b4361c94b"
+    },
+    {
+      "id": "WIT-036",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "07ccf669d3ebe93a5ca875087d4a260d89b4f0970ae20e08253d7534e5f5b52f"
+    },
+    {
+      "id": "WIT-037",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "a1474913be01ce69333e07def11ea8f9912785e5e0f90d6e4fe30d3f962320eb"
+    },
+    {
+      "id": "WIT-038",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "9db5478e3778158b9c398d9aacd45347cf3db1c1d706e02d4796348ab1851ec2"
+    },
+    {
+      "id": "WIT-039",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "3b0a54e1ba3adf5e89c0fac12dabc871025308aa192e4e068e910d2876de9dad"
+    },
+    {
+      "id": "WIT-040",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "event_date: events need a verified schedule before publication"
+      ],
+      "approval_digest": "691cca991a06b8d8b0eaa1e0014d397a4047459d308cfb1439afe424739a0e6c"
+    },
+    {
+      "id": "WIT-041",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "eb7af2f71be94af13aa1edfe69184a77443841e4e52f8b82f883b729b5bd910e"
+    },
+    {
+      "id": "WIT-042",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "a71aa87d09b4c3f34f07bda6abdaea6c5bde1889166418c7e63948294286829a"
+    },
+    {
+      "id": "WIT-043",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text"
+      ],
+      "approval_digest": "4f58e8cb819823ee7bf3fbde3968f619ea855409fbdcbdd8aa5f12cca00a81ed"
+    },
+    {
+      "id": "WIT-044",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)",
+        "deadline_timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "df773b759a78592efd71fb9fb5940120a63d7859fb3bb9dda1ae0cc97917c0e8"
+    },
+    {
+      "id": "WIT-045",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "b6d6d7bb9a9e46fa59d51012dcb57c17d9d9eb0c2db7cf0f69629b4dacf210bf"
+    },
+    {
+      "id": "WIT-046",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)",
+        "deadline_timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "e134719e2698e481cf533ade5559aa9dbc19aea7e3d8b621f9238da80566f499"
+    },
+    {
+      "id": "WIT-047",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "33ebaae767f8c930631b513dce15edbbf7faa05c67abf3361cc92080cd967ab2"
+    },
+    {
+      "id": "WIT-048",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "2f65074e3b6ec38e20ea74957ded9be74b17328a43b20dc4b679d20276ad86e6"
+    },
+    {
+      "id": "WIT-049",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "707365a228b5a545fdcb318c9a97643da89f691ff2b15c94a838c0a023052ac4"
+    },
+    {
+      "id": "WIT-050",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "3d65378b297a08479603a96e8f32759cdd3df8dbcecd656dcb49fb012221d9c7"
+    },
+    {
+      "id": "WIT-051",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "d176d03b3d17da00a1610e68a8d659cbc02e8fb38d7cef55ee6dc86a0dae1f22"
+    },
+    {
+      "id": "WIT-052",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "a66f28c0017074ab924c4709b0de9bcfd785e8ad99110f9e7714d0d7d1e68dba"
+    },
+    {
+      "id": "WIT-053",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "780fb331b49a1c81da49d3c82e927304b7be0d3ba9e57755d27629dad97cf4b7"
+    },
+    {
+      "id": "WIT-054",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "e6dc974b31d91b3e7735160bcb7ed01af9201904db35d8f7ed4ab2f10ef01602"
+    },
+    {
+      "id": "WIT-055",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "2af68388e0bcc26218b6f41c92ef61e20201418af1f91da514e5ae1465ab3105"
+    },
+    {
+      "id": "WIT-056",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "13e9b03d7b6c7634cb6d6688cd8650fddea372c844ada8ca5af1683ddf3145b4"
+    },
+    {
+      "id": "WIT-057",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "6dad1286e2da1c993d152389778e17822f9b3c46a721c78a82b3b1c36c78b785"
+    },
+    {
+      "id": "WIT-058",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "ee2899e5490ee0b9d2f0c742bcc044ea8aa708ec17296a355f3160e435291818"
+    },
+    {
+      "id": "WIT-059",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "967cefd034efabeb78cae0e2aab1a8339687ef0fac742f191479fdc25bb2e3c5"
+    },
+    {
+      "id": "WIT-060",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "5203667c8e94768b12596a6cc302a541092108f63c3e816e052b6cd635a5db14"
+    },
+    {
+      "id": "WIT-061",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "b2e4753c31c2d3997e9a2491ad87e2d12666a6a8ab04657951cd59b70a8e8473"
+    },
+    {
+      "id": "WIT-062",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "82e3601b0feca4f99ed146e05e6878a71690cc4c64c46eaef939ef6ff87c35de"
+    },
+    {
+      "id": "WIT-063",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "8b29105d9c6870863734c8089144f012d01c95795914fbb4ae0e73719e8be7f0"
+    },
+    {
+      "id": "WIT-064",
+      "collection": "opportunities",
+      "status": "draft_review",
+      "issues": [
+        "description: required nonempty text",
+        "timezone: explicit IANA timezone required (e.g. America/New_York)"
+      ],
+      "approval_digest": "60053edb2794832073a500f576383366aeafbea72cff4c2b7b2c2bb6e4f82e13"
+    },
+    {
+      "id": "PRJ-001",
+      "collection": "projects",
+      "status": "draft_review",
+      "issues": [
+        "publication_permission: explicit granted permission and evidence required before publishing"
+      ],
+      "approval_digest": "54b05d726d15fab5c89210d4ce1675ba78cae202bc3e8286d0746d0b3b0266b6"
+    },
+    {
+      "id": "PRJ-002",
+      "collection": "projects",
+      "status": "draft_review",
+      "issues": [
+        "publication_permission: explicit granted permission and evidence required before publishing"
+      ],
+      "approval_digest": "a9c92b648e91f778d004a0d7a03f97a2bb59b0fbda453a1fddd30c071af6cf8d"
+    },
+    {
+      "id": "PRJ-003",
+      "collection": "projects",
+      "status": "draft_review",
+      "issues": [
+        "publication_permission: explicit granted permission and evidence required before publishing"
+      ],
+      "approval_digest": "b70d0e0f3f149d382ccc038bbc14ae6012b851a9fb13e16dde25b4f5c0bebc37"
+    },
+    {
+      "id": "PRJ-004",
+      "collection": "projects",
+      "status": "draft_review",
+      "issues": [
+        "publication_permission: explicit granted permission and evidence required before publishing"
+      ],
+      "approval_digest": "ab86688f2fee4140194fbf7d8d0d664a473ddb8197443b4b7afe3637e24602fd"
+    },
+    {
+      "id": "PRJ-005",
+      "collection": "projects",
+      "status": "draft_review",
+      "issues": [
+        "publication_permission: explicit granted permission and evidence required before publishing"
+      ],
+      "approval_digest": "b0940da43031217924240d17ab1d8cd47b20211962be2a57d93d91b1169e8384"
+    },
+    {
+      "id": "PRJ-006",
+      "collection": "projects",
+      "status": "draft_review",
+      "issues": [
+        "publication_permission: explicit granted permission and evidence required before publishing"
+      ],
+      "approval_digest": "f13ea1a1e2417174293d9ab34d3d9560942dd3bc9d54a6cc3709cd2aa29deee0"
+    },
+    {
+      "id": "PRJ-007",
+      "collection": "projects",
+      "status": "draft_review",
+      "issues": [
+        "publication_permission: explicit granted permission and evidence required before publishing"
+      ],
+      "approval_digest": "8bbfe54fbc96f9b7dd19d9cd5518db87c01aef1f554f35024d550a94dc384115"
+    },
+    {
+      "id": "PRJ-008",
+      "collection": "projects",
+      "status": "draft_review",
+      "issues": [
+        "publication_permission: explicit granted permission and evidence required before publishing"
+      ],
+      "approval_digest": "ca684dc9919f92297eacae7d3492238d1925630e4daf14f9e1a213c0ad3aadea"
+    }
+  ]
+}

@@ -2,6 +2,10 @@
 
 This directory holds content assets and source markdown files for the digital experience.
 
+The [draft seed and catalog import workflow](seed/README.md) now supports PR #6's
+opportunities and student projects. Draft JSON is editorial input, not public search
+content. Schema and record approvals remain pending until the team reviews them.
+
 Use it for blog posts, knowledge base entries, landing-page copy, or structured content that the app can render.
 
 # WIT-Hub Architecture

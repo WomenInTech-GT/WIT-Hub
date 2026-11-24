@@ -1,5 +1,5 @@
 """Search utilities for WIT-Hub."""
 
-from .service import search_documents
+from .service import SearchFilters, StudentProfile, search_documents, search_opportunities
 
-__all__ = ["search_documents"]
+__all__ = ["SearchFilters", "StudentProfile", "search_documents", "search_opportunities"]
