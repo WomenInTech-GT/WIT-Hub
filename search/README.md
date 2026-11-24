@@ -8,6 +8,7 @@ uv pip install -r backend/requirements.txt
 $env:DATABASE_URL = 'postgresql://USER:PASSWORD@localhost:5432/wit_hub'
 psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f backend/migrations/002_content_catalog.sql
 psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f backend/migrations/003_catalog_vocabulary.sql
+psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f backend/migrations/004_content_review.sql
 uv run uvicorn backend.app.main:app --reload
 ```
 

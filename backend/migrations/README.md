@@ -1,14 +1,16 @@
 # Content catalog SQL design
 
 The MVP remains JSON-based. This SQL is an optional future persistence target,
-not a requirement to deploy PostgreSQL for the MVP. The PostgreSQL search path is integrated; JSON validation and export remain follow-up work.
+not a requirement to deploy PostgreSQL for the MVP. PostgreSQL search and the
+draft JSON mapping/import workflow are integrated; see [draft import](../../content/seed/README.md).
 
 ## Setup and existing databases
 
 `002_content_catalog.sql` is now the standalone baseline. Apply it once to a new
-PostgreSQL database, then apply `003_catalog_vocabulary.sql` before optionally loading `content/seed_catalog_demo.sql`.
+PostgreSQL database, then apply `003_catalog_vocabulary.sql` and
+`004_content_review.sql` before optionally loading `content/seed_catalog_demo.sql`.
 The number is retained so installations that already applied it do not confuse
-it with a new migration. Search, API, CI, and tests now use `catalog.content_items`.
+it with a new migration. Search and API read the approved-only `catalog.published_content` view.
 The earlier opportunity migration and seed have been removed from the repository.
 
 Existing databases: apply the catalog migration only if it has not already been
@@ -17,6 +19,12 @@ and review any real records before importing them into the catalog; verify kind,
 organization, source, dates, and eligibility rather than inventing metadata.
 Keep deployed migration records/backups. Do not drop the old table until its data
 has been migrated and checked. No user database is modified by this code change.
+
+Migration 004 defaults **all existing and new records to draft_review**. Existing
+content needs explicit review metadata and approval before it reappears in search.
+It adds draft staging, separate student projects with permission gates, and the
+specific PR #6 category vocabulary. Deploy 004 with the updated search code.
+The demo seed explicitly approves only its fictional fixture IDs.
 
 Integration tests require a disposable database without a `catalog` schema;
 they create that schema inside a transaction and roll it back after each test.
@@ -109,7 +117,7 @@ to lowercase; prose and organization names retain their case.
 
 ## Remaining JSON MVP work
 
-The PostgreSQL search implementation is now integrated. JSON validation, static
-client-side search, and JSON-to-SQL import/export remain separate follow-up work.
-When introduced, validated JSON should be the source of truth rather than a
-second independently maintained production catalog.
+Reviewed JSON-to-SQL import and validation are implemented in `scripts/import_catalog.py`.
+The source CSV exporter and standalone validator will arrive with PR #6.
+Static client-side search and approved SQL-to-JSON export remain
+follow-up work. Do not point public clients at draft seeds; use approved content.

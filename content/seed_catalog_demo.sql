@@ -77,4 +77,14 @@ ON CONFLICT (id) DO UPDATE SET
     starts_at = EXCLUDED.starts_at, ends_at = EXCLUDED.ends_at,
     deadline_at = EXCLUDED.deadline_at;
 
+-- Explicit approval is limited to these fictional demo IDs, never real drafts.
+UPDATE catalog.content_items SET publication_status = 'approved',
+    reviewed_by = 'Fictional demo fixture', reviewed_at = CURRENT_TIMESTAMP
+WHERE id IN (
+    'catalog-demo-internship', 'catalog-demo-workshop', 'catalog-demo-mentorship', 'catalog-demo-guide',
+    'demo-expanded-cs', 'demo-expanded-ai', 'demo-robotics-body', 'demo-robotics-title',
+    'demo-resume', 'demo-scholarship', 'demo-data-program', 'demo-pm', 'demo-aerospace',
+    'demo-competition', 'demo-grad', 'demo-job', 'demo-workshop', 'demo-conference',
+    'demo-wit-next-week', 'demo-campus-weekend'
+);
 COMMIT;

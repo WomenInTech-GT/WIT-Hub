@@ -52,6 +52,10 @@ jobs:
       - name: Run unit, API, and PostgreSQL regression tests
         run: python -m pytest -q --junitxml=test-results.xml
 
+      - name: Validate draft mapping without publishing
+        if: ${{ hashFiles('content/seed/opportunities.draft.json') != '' && hashFiles('content/seed/student_projects.draft.json') != '' }}
+        run: python -m scripts.import_catalog --report catalog-import-review-ci.json
+
       - name: Create and populate the demo catalog
         run: |
           python - <<'PY'
@@ -60,7 +64,7 @@ jobs:
           import psycopg
 
           with psycopg.connect(os.environ["DATABASE_URL"], autocommit=True) as connection:
-              for filename in ("backend/migrations/002_content_catalog.sql", "backend/migrations/003_catalog_vocabulary.sql", "content/seed_catalog_demo.sql"):
+              for filename in ("backend/migrations/002_content_catalog.sql", "backend/migrations/003_catalog_vocabulary.sql", "backend/migrations/004_content_review.sql", "content/seed_catalog_demo.sql"):
                   connection.execute(Path(filename).read_text(encoding="utf-8"))
               count = connection.execute("SELECT count(*) FROM catalog.content_items").fetchone()[0]
               if not count:
@@ -94,6 +98,7 @@ jobs:
           path: |
             test-results.xml
             search-results-ci.json
+            catalog-import-review-ci.json
           retention-days: 14
 
   check:

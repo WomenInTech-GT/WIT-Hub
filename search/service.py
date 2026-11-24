@@ -181,7 +181,7 @@ def build_search(filters: SearchFilters, profile: StudentProfile | None = None,
         FROM (SELECT c.*, c.url AS source_url, c.category AS opportunity_type,
                      coalesce(c.location, '') AS location_name,
                      c.deadline_at AS application_deadline
-              FROM catalog.content_items c) o CROSS JOIN q WHERE {where}
+              FROM catalog.published_content c) o CROSS JOIN q WHERE {where}
         ORDER BY match_score DESC, lexical_score DESC,
                  coalesce(o.deadline_at, (o.deadline_date + 1)::timestamp AT TIME ZONE o.deadline_timezone) ASC NULLS LAST, o.id ASC
         LIMIT %(limit)s OFFSET %(offset)s
@@ -213,6 +213,8 @@ def search_opportunities(connection, filters: SearchFilters,
         rows = cursor.fetchall()
     for row in rows:
         row.pop("search_vector", None)
+        row.pop("reviewed_by", None)
+        row.pop("reviewed_at", None)
         row["explanations"] = explain_match(row, profile) if profile is not None else []
     return rows
 

@@ -30,6 +30,9 @@ def db():
             upgrade = (Path(__file__).parents[1] / "backend/migrations/003_catalog_vocabulary.sql").read_text()
             upgrade = upgrade.replace("BEGIN;", "", 1).rsplit("COMMIT;", 1)[0]
             conn.execute(sql.SQL(cast(LiteralString, upgrade)))
+            review = (Path(__file__).parents[1] / "backend/migrations/004_content_review.sql").read_text()
+            review = review.replace("BEGIN;", "", 1).rsplit("COMMIT;", 1)[0]
+            conn.execute(sql.SQL(cast(LiteralString, review)))
             yield conn
         finally:
             conn.rollback()
@@ -39,7 +42,8 @@ def add(db, id, **changes):
     data = dict(id=id, title="WIT beginner coding workshop", description="Build coding projects",
                 url="https://example.org/opportunity", category="workshop",
                 location_mode="online", location="Zoom", tags=["coding"], content_kind="opportunity", organization="Demo",
-                source="Test fixture", last_updated="2026-11-09", eligibility_status="unrestricted")
+                source="Test fixture", last_updated="2026-11-09", eligibility_status="unrestricted",
+                publication_status="approved", reviewed_by="Test fixture", reviewed_at="2026-11-09T00:00:00Z")
     for old, new in {"source_url": "url", "opportunity_type": "category",
                      "location_name": "location", "application_deadline": "deadline_at"}.items():
         if old in changes:
@@ -74,6 +78,16 @@ def test_deadline_boundaries_and_override(db):
         cur.execute(statement, params)
         assert [r["id"] for r in cur.fetchall()] == ["boundary", "open"]
     assert set(ids(db, SearchFilters(include_expired=True))) == {"expired", "boundary", "open"}
+
+
+def test_publication_is_required_even_with_include_expired(db):
+    add(db, 'draft', publication_status='draft_review', reviewed_by=None, reviewed_at=None)
+    add(db, 'rejected', publication_status='rejected', reviewed_by=None, reviewed_at=None)
+    add(db, 'approved')
+    assert ids(db, SearchFilters(include_expired=True)) == ['approved']
+    assert ids(db, profile=StudentProfile()) == ['approved']
+    with pytest.raises(psycopg.errors.CheckViolation), db.transaction():
+        db.execute("UPDATE catalog.content_items SET publication_status = 'approved' WHERE id = 'draft'")
 
 
 def test_lexical_phrases_acronyms_and_trigger_updates(db):
@@ -309,6 +323,7 @@ def test_upgrade_normalizes_existing_categories(db):
     db.execute('ALTER TABLE catalog.content_items DISABLE TRIGGER content_prepare')
     db.execute("INSERT INTO catalog.content_items (id, content_kind, category, title, description, organization, url, source, last_updated, search_vector) VALUES ('legacy', 'opportunity', ' Internships ', 'Legacy', 'Legacy record', 'Demo', 'https://example.org', 'Test', CURRENT_DATE, ''::tsvector)")
     db.execute('ALTER TABLE catalog.content_items ENABLE TRIGGER content_prepare')
+    db.execute("UPDATE catalog.content_items SET publication_status = 'approved', reviewed_by = 'Test', reviewed_at = CURRENT_TIMESTAMP WHERE id = 'legacy'")
     db.execute('UPDATE catalog.content_items SET category = category')
     db.execute('ALTER TABLE catalog.content_items ADD CONSTRAINT content_category_known FOREIGN KEY (category) REFERENCES catalog.categories(category)')
     assert ids(db, SearchFilters(categories=['internship'])) == ['legacy']
