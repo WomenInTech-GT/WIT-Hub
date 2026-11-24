@@ -60,7 +60,7 @@ jobs:
           import psycopg
 
           with psycopg.connect(os.environ["DATABASE_URL"], autocommit=True) as connection:
-              for filename in ("backend/migrations/002_content_catalog.sql", "content/seed_catalog_demo.sql"):
+              for filename in ("backend/migrations/002_content_catalog.sql", "backend/migrations/003_catalog_vocabulary.sql", "content/seed_catalog_demo.sql"):
                   connection.execute(Path(filename).read_text(encoding="utf-8"))
               count = connection.execute("SELECT count(*) FROM catalog.content_items").fetchone()[0]
               if not count:

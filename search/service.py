@@ -115,7 +115,11 @@ def build_search(filters: SearchFilters, profile: StudentProfile | None = None,
                           ("content_kinds", "content_kind"), ("location_modes", "location_mode")):
         if getattr(filters, field):
             params[field] = getattr(filters, field)
-            clauses.append(f"o.{column} = ANY(%({field})s)")
+            if field in ("categories", "opportunity_types"):
+                clauses.append(f"o.{column} = ANY(ARRAY(SELECT catalog.normalize_category(value) "
+                               f"FROM unnest(%({field})s::text[]) value))")
+            else:
+                clauses.append(f"o.{column} = ANY(%({field})s)")
     if filters.location.strip():
         params["location"] = filters.location.strip()
         clauses.append("strpos(lower(o.location_name), lower(%(location)s)) > 0")

@@ -7,6 +7,7 @@ uv venv
 uv pip install -r backend/requirements.txt
 $env:DATABASE_URL = 'postgresql://USER:PASSWORD@localhost:5432/wit_hub'
 psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f backend/migrations/002_content_catalog.sql
+psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f backend/migrations/003_catalog_vocabulary.sql
 uv run uvicorn backend.app.main:app --reload
 ```
 
@@ -128,8 +129,8 @@ allow unrestricted records for that dimension. Availability requires a known tim
 the lower bound and a known end at/before the upper bound when provided. Type and location
 preferences boost scores; use `filters` to make them mandatory.
 
-Score = 3 Ã— fraction of selected interests matching tags + 2 Ã— preferred type match
-+ 1 Ã— preferred location mode match. Tune server-side `RankingWeights` when calling
+Score = 3 Ãƒâ€” fraction of selected interests matching tags + 2 Ãƒâ€” preferred type match
++ 1 Ãƒâ€” preferred location mode match. Tune server-side `RankingWeights` when calling
 `search_opportunities`. All eligible records are scored **before** limit/offset. Ties sort
 by lexical score, earliest deadline (null last), then ID. Explanations list actual overlaps;
 zero-overlap results are labeled as such. Responses contain `items`, `limit`, and `offset`,

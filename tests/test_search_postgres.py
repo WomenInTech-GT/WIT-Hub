@@ -1,20 +1,12 @@
 """Real PostgreSQL contract tests; set TEST_DATABASE_URL to enable.
 
-<<<<<<< HEAD
 Use a disposable database without a catalog schema. Each test rolls back its schema.
-=======
-All objects and fixture records live in a unique schema rolled back after each test.
->>>>>>> 6f11d812a3cce55dbb0f73c830afaa19c2dadbc4
 """
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import LiteralString, cast
-<<<<<<< HEAD
 
-=======
-from uuid import uuid4
->>>>>>> 6f11d812a3cce55dbb0f73c830afaa19c2dadbc4
 
 import psycopg
 import pytest
@@ -31,18 +23,13 @@ def db():
         pytest.skip("TEST_DATABASE_URL is required for PostgreSQL integration tests")
     with psycopg.connect(url) as conn:
         try:
-<<<<<<< HEAD
             # Dedicated disposable database: never drop or reuse an existing catalog.
             migration = (Path(__file__).parents[1] / "backend/migrations/002_content_catalog.sql").read_text()
             migration = migration.replace("BEGIN;", "", 1).rsplit("COMMIT;", 1)[0]
             conn.execute(sql.SQL(cast(LiteralString, migration)))
-=======
-            schema = "search_test_" + uuid4().hex
-            conn.execute(sql.SQL("CREATE SCHEMA {}").format(sql.Identifier(schema)))
-            conn.execute(sql.SQL("SET LOCAL search_path TO {}").format(sql.Identifier(schema)))
-            migration = (Path(__file__).parents[1] / "backend/migrations/001_opportunities.sql").read_text()
-            conn.execute(sql.SQL(cast(LiteralString, migration.removeprefix("BEGIN;").replace("COMMIT;", ""))))
->>>>>>> 6f11d812a3cce55dbb0f73c830afaa19c2dadbc4
+            upgrade = (Path(__file__).parents[1] / "backend/migrations/003_catalog_vocabulary.sql").read_text()
+            upgrade = upgrade.replace("BEGIN;", "", 1).rsplit("COMMIT;", 1)[0]
+            conn.execute(sql.SQL(cast(LiteralString, upgrade)))
             yield conn
         finally:
             conn.rollback()
@@ -50,7 +37,6 @@ def db():
 
 def add(db, id, **changes):
     data = dict(id=id, title="WIT beginner coding workshop", description="Build coding projects",
-<<<<<<< HEAD
                 url="https://example.org/opportunity", category="workshop",
                 location_mode="online", location="Zoom", tags=["coding"], content_kind="opportunity", organization="Demo",
                 source="Test fixture", last_updated="2026-11-09", eligibility_status="unrestricted")
@@ -70,12 +56,6 @@ def add(db, id, **changes):
     if any(data.get(k) for k in ("eligible_majors", "eligible_years", "experience_levels", "eligibility")):
         data["eligibility_status"] = "restricted"
     db.execute(sql.SQL("INSERT INTO catalog.content_items ({}) VALUES ({})").format(
-=======
-                source_url="https://example.org/opportunity", opportunity_type="workshop",
-                location_mode="online", location_name="Zoom", tags=["coding"])
-    data.update(changes)
-    db.execute(sql.SQL("INSERT INTO opportunities ({}) VALUES ({})").format(
->>>>>>> 6f11d812a3cce55dbb0f73c830afaa19c2dadbc4
         sql.SQL(",").join(map(sql.Identifier, data)),
         sql.SQL(",").join(sql.Placeholder() for _ in data)), list(data.values()))
 
@@ -101,11 +81,7 @@ def test_lexical_phrases_acronyms_and_trigger_updates(db):
     add(db, "other", title="Music workshop", description="Play piano", tags=["music"])
     assert ids(db, SearchFilters(query='WIT "beginner coding"')) == ["coding"]
     assert ids(db, SearchFilters(query="piano")) == ["other"]
-<<<<<<< HEAD
     db.execute("UPDATE catalog.content_items SET title = 'Robotics' WHERE id = 'other'")
-=======
-    db.execute("UPDATE opportunities SET title = 'Robotics' WHERE id = 'other'")
->>>>>>> 6f11d812a3cce55dbb0f73c830afaa19c2dadbc4
     assert ids(db, SearchFilters(query="robotics")) == ["other"]
     assert ids(db, SearchFilters(query="nonexistent")) == []
 
@@ -216,7 +192,6 @@ def test_inferred_start_window_intersects_explicit_deadline_window(db):
                             date_from='2026-11-02T00:00:00-05:00',
                             date_to='2026-11-03T00:00:00-05:00')
     assert [r['id'] for r in search_opportunities(db, filters, now=now)] == ['match']
-<<<<<<< HEAD
 
 def test_catalog_kinds_and_compatibility_fields(db):
     add(db, 'program', content_kind='program', category='mentorship', location_mode='hybrid')
@@ -290,5 +265,51 @@ def test_api_serializes_catalog_dates_and_compatibility_fields(db, monkeypatch):
     assert item['starts_at'] is None
     assert item['source_url'] == item['url']
     assert client.post('/api/recommendations', json={'profile': {}}).json()['items'][0]['id'] == 'api'
-=======
->>>>>>> 6f11d812a3cce55dbb0f73c830afaa19c2dadbc4
+
+
+@pytest.mark.parametrize('kind', ['opportunity', 'event', 'program', 'resource'])
+def test_shared_category_vocabulary_through_views(db, kind):
+    changes = dict(content_kind=kind, category=' Tutorials ')
+    if kind == 'event':
+        changes.update(schedule_precision='date', start_date='2027-01-01', timezone='UTC')
+    elif kind == 'resource':
+        changes.update(schedule_precision='not-applicable', location_mode='not-applicable',
+                       location=None, deadline_status='none')
+    add(db, kind, **changes)
+    view = {'opportunity': 'opportunities', 'event': 'events',
+            'program': 'programs', 'resource': 'resources'}[kind]
+    assert db.execute('SELECT category FROM catalog.content_items WHERE id = %s', (kind,)).fetchone()[0] == 'tutorial'
+    db.execute(sql.SQL('UPDATE catalog.{} SET category = %s WHERE id = %s').format(sql.Identifier(view)),
+               (' WORKSHOPS ', kind))
+    assert ids(db, SearchFilters(categories=['WORKSHOPS'], include_expired=True)) == [kind]
+    assert ids(db, SearchFilters(opportunity_types=['workshops'], include_expired=True)) == [kind]
+    with pytest.raises(psycopg.errors.ForeignKeyViolation), db.transaction():
+        db.execute(sql.SQL('UPDATE catalog.{} SET category = %s WHERE id = %s').format(sql.Identifier(view)),
+                   ('unapproved-category', kind))
+
+
+def test_experience_normalization_and_update(db):
+    add(db, 'levels', experience_levels=[' BEGINNER ', 'beginner', 'ADVANCED', ''])
+    assert db.execute('SELECT experience_levels FROM catalog.content_items').fetchone()[0] == ['advanced', 'beginner']
+    assert ids(db, profile=StudentProfile(experience_level='beginner')) == ['levels']
+    db.execute("UPDATE catalog.content_items SET experience_levels = ARRAY[' INTERMEDIATE ', 'intermediate']")
+    assert db.execute('SELECT experience_levels FROM catalog.content_items').fetchone()[0] == ['intermediate']
+    assert ids(db, profile=StudentProfile(experience_level='beginner')) == []
+
+
+@pytest.mark.parametrize('levels', [[None], ['beginner', None], ['EXPERT'], [' ']])
+def test_invalid_experience_not_hidden_by_normalization(db, levels):
+    with pytest.raises(psycopg.Error):
+        add(db, 'invalid', experience_levels=levels)
+
+
+def test_upgrade_normalizes_existing_categories(db):
+    # Recreate the pre-upgrade constraint/trigger behavior within this rollback-only test.
+    db.execute('ALTER TABLE catalog.content_items DROP CONSTRAINT content_category_known')
+    db.execute('ALTER TABLE catalog.content_items DISABLE TRIGGER content_prepare')
+    db.execute("INSERT INTO catalog.content_items (id, content_kind, category, title, description, organization, url, source, last_updated, search_vector) VALUES ('legacy', 'opportunity', ' Internships ', 'Legacy', 'Legacy record', 'Demo', 'https://example.org', 'Test', CURRENT_DATE, ''::tsvector)")
+    db.execute('ALTER TABLE catalog.content_items ENABLE TRIGGER content_prepare')
+    db.execute('UPDATE catalog.content_items SET category = category')
+    db.execute('ALTER TABLE catalog.content_items ADD CONSTRAINT content_category_known FOREIGN KEY (category) REFERENCES catalog.categories(category)')
+    assert ids(db, SearchFilters(categories=['internship'])) == ['legacy']
+    assert ids(db, SearchFilters(query='internship')) == ['legacy']

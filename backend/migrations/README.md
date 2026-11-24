@@ -6,7 +6,7 @@ not a requirement to deploy PostgreSQL for the MVP. The PostgreSQL search path i
 ## Setup and existing databases
 
 `002_content_catalog.sql` is now the standalone baseline. Apply it once to a new
-PostgreSQL database, then optionally load `content/seed_catalog_demo.sql`.
+PostgreSQL database, then apply `003_catalog_vocabulary.sql` before optionally loading `content/seed_catalog_demo.sql`.
 The number is retained so installations that already applied it do not confuse
 it with a new migration. Search, API, CI, and tests now use `catalog.content_items`.
 The earlier opportunity migration and seed have been removed from the repository.
@@ -35,7 +35,26 @@ the shared table, not union independently ranked result sets.
 An event is one scheduled occurrence; a program is an ongoing or cohort-based
 experience; an opportunity is something to apply for or pursue; a resource is
 reference material. Category (internship, workshop, mentorship, guide) is separate
-from kind. Category and tag values are normalized but not a fixed taxonomy yet.
+from kind. Categories use a shared controlled vocabulary; tags remain free-form.
+
+Apply `003_catalog_vocabulary.sql` once to existing catalog databases too. It
+normalizes existing rows and refreshes search vectors in one transaction. Unknown
+legacy categories fail the migration without deleting data: review and map them
+or add approved categories/aliases before retrying.
+
+Canonical categories: internship, scholarship, competition, job, research,
+project, workshop, conference, hackathon, event, program, mentorship, guide,
+tutorial. `catalog.categories` owns the vocabulary; `catalog.category_aliases`
+maps explicit plurals to canonical values. Base-table and view writes normalize
+case, whitespace, and aliases, then reject unknown categories through a foreign
+key. Category search filters (including `opportunity_types`) use the same database
+function. Add approved categories and aliases through reviewed migrations.
+Category does not imply a content kind.
+
+Experience levels use `normalize_terms()` before constraint validation: lowercase,
+trim, deduplicate, and remove blanks. Null elements are rejected before normalization;
+unknown levels still fail. Allowed levels are beginner, intermediate, advanced.
+Blank-only restrictions cannot bypass the eligibility consistency constraint.
 
 ## Field mapping
 
